@@ -7,6 +7,12 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
+
+  TextEditingController _controllerNome = TextEditingController();
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+  String _msgError = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +48,7 @@ class _CadastroState extends State<Cadastro> {
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32))),
+                controller: _controllerNome,
               ),
             ),
                 Padding(
@@ -57,6 +64,7 @@ class _CadastroState extends State<Cadastro> {
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(32))),
+                    controller: _controllerEmail,
                   ),
                 ),
                 TextField(
@@ -71,6 +79,7 @@ class _CadastroState extends State<Cadastro> {
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(32))),
+                  controller: _controllerSenha,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
@@ -84,8 +93,19 @@ class _CadastroState extends State<Cadastro> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32)
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        _validarCampos();
+                      }),
                 ),
+                Center(
+                  child: Text(
+                    _msgError,
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -93,4 +113,39 @@ class _CadastroState extends State<Cadastro> {
       ),
     );
   }
+  _validarCampos(){
+
+    String nome = _controllerNome.text;
+    String email = _controllerEmail.text;
+    String senha = _controllerSenha.text;
+
+    if(nome.isNotEmpty && nome.length>=3){
+
+      if (email.isNotEmpty && email.contains("@")) {
+
+        if (senha.isNotEmpty) {
+          setState(() {
+            _msgError = "Sucesso";
+            _cadastrarUser();
+          });
+        }  else {
+          setState(() {
+            _msgError = "Insira uma senha";
+          });
+        }
+      }  else{
+        setState(() {
+          _msgError = "Insira um email válido";
+        });
+      }
+
+      }else{
+      setState(() {
+        _msgError = "Nome precisa ter pelo menos 3 caracteres";
+      });
+    }
+
+  }
+
+  _cadastrarUser(){}
 }
