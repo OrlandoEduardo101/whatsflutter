@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "282020867147",
+    "firebase_url": "https://whatsflutter-330f3.firebaseio.com",
+    "project_id": "whatsflutter-330f3",
+    "storage_bucket": "whatsflutter-330f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282020867147:android:1271468fd8cf74069531ce",
+        "android_client_info": {
+          "package_name": "com.orlandoeduardo101.whatsflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282020867147-trt88nsuf5q2faefmijrrpa3oi74v4mh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orlandoeduardo101.whatsflutter",
+            "certificate_hash": "c6060a4aa0799e312fd49f99f5a4550b969fd7f3"
+          }
+        },
+        {
+          "client_id": "282020867147-atnvuqmfi778tg36mosmfu7r9gjciojm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmuDrVmEaodNyCZtxncY_OnM8XA_W6_0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282020867147-atnvuqmfi778tg36mosmfu7r9gjciojm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
