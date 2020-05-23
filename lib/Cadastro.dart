@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:whatsflutter/Home.dart';
+import 'package:whatsflutter/model/Usuario.dart';
 import 'package:whatsflutter/res.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Cadastro extends StatefulWidget {
   @override
@@ -123,14 +127,18 @@ class _CadastroState extends State<Cadastro> {
 
       if (email.isNotEmpty && email.contains("@")) {
 
-        if (senha.isNotEmpty) {
-          setState(() {
+        if (senha.isNotEmpty && senha.length>5) {
+          user usuario = user();
+          usuario.nome = nome;
+          usuario.email = email;
+          usuario.senha = senha;
+          _cadastrarUser(usuario);
+          /*setState(() {
             _msgError = "Sucesso";
-            _cadastrarUser();
-          });
+          });*/
         }  else {
           setState(() {
-            _msgError = "Insira uma senha";
+            _msgError = "Senha precisa ter pelo menos 6 caracteres";
           });
         }
       }  else{
@@ -147,5 +155,20 @@ class _CadastroState extends State<Cadastro> {
 
   }
 
-  _cadastrarUser(){}
+  _cadastrarUser(user usuario){
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.createUserWithEmailAndPassword(
+        email: usuario.email,
+        password: usuario.senha
+    ).then((firebaseUser){
+      Get.to(Home());
+      setState(() {
+        _msgError = "Sucesso";
+      });
+    }).catchError((error){
+      setState(() {
+        _msgError = "Erro, verifique os campos!";
+      });
+    });
+  }
 }
