@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsflutter/Home.dart';
@@ -161,7 +162,13 @@ class _CadastroState extends State<Cadastro> {
         email: usuario.email,
         password: usuario.senha
     ).then((firebaseUser){
-      Get.to(Home());
+
+      Firestore db = Firestore.instance;
+      db.collection("users")
+          .document(firebaseUser.user.uid)
+          .setData(usuario.toMap());
+
+      Get.offAll(Home());
       setState(() {
         _msgError = "Sucesso";
       });
@@ -170,5 +177,7 @@ class _CadastroState extends State<Cadastro> {
         _msgError = "Erro, verifique os campos!";
       });
     });
+
+
   }
 }
