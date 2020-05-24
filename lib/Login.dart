@@ -23,7 +23,8 @@ class _LoginState extends State<Login> {
     FirebaseAuth auth = FirebaseAuth.instance;
     FirebaseUser userLog = await auth.currentUser();
     if (userLog != null) {
-      Get.offAll(Home());
+      Get.offAll(
+          Home());
     }
   }
 
