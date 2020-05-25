@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:whatsflutter/Cadastro.dart';
 import 'package:whatsflutter/Home.dart';
 import 'package:whatsflutter/Login.dart';
+import 'package:whatsflutter/configuracoes.dart';
 
 class RouteGenerator {
     static Route<dynamic> generateRoute (RouteSettings settings){
@@ -22,6 +23,10 @@ class RouteGenerator {
         case "/home":
           return MaterialPageRoute(
               builder: (context) => Home()
+          );
+        case "/conf":
+          return MaterialPageRoute(
+              builder: (context) => Configs()
           );
         default:
           _erroRota();
