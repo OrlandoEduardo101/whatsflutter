@@ -40,7 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
   _deslogar()async{
     FirebaseAuth auth = FirebaseAuth.instance;
     await auth.signOut();
-    Get.offAll(Login());
+    Get.offAllNamed("/login");
   }
 
   @override
