@@ -23,8 +23,7 @@ class _LoginState extends State<Login> {
     FirebaseAuth auth = FirebaseAuth.instance;
     FirebaseUser userLog = await auth.currentUser();
     if (userLog != null) {
-      Get.offAll(
-          Home());
+      Get.offAllNamed("/home");
     }
   }
 
@@ -171,7 +170,7 @@ class _LoginState extends State<Login> {
         password: usuario.senha
     ).then((firebaseUser){
 
-      Get.offAll(Home());
+      Get.offAllNamed("/home");
 
     } )
     .catchError((error){

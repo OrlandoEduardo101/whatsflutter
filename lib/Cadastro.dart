@@ -168,7 +168,7 @@ class _CadastroState extends State<Cadastro> {
           .document(firebaseUser.user.uid)
           .setData(usuario.toMap());
 
-      Get.offAll(Home());
+      Get.offAllNamed("/home");
       setState(() {
         _msgError = "Sucesso";
       });
@@ -178,6 +178,6 @@ class _CadastroState extends State<Cadastro> {
       });
     });
 
-
+    Get.offAllNamed("/home");
   }
 }
