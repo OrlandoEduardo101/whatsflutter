@@ -16,7 +16,6 @@ abstract class _AuthControllerBase with Store{
   @observable
   FirebaseUser user;
 
-
   @action
   setUser(FirebaseUser value) {
     user = value;
@@ -37,6 +36,10 @@ abstract class _AuthControllerBase with Store{
 
   Future getCreateUser(String email, String password) async {
     user = await _authRepository.getCreateUser(email, password);
+  }
+
+  Future getUser() async {
+    user = _authRepository.getUser as FirebaseUser;
   }
 
   Future logOut(){

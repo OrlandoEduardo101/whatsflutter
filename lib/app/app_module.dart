@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/app_controller.dart';
+import 'package:whatsflutter/app/modules/configuracoes/configuracoes_controller.dart';
+import 'package:whatsflutter/app/modules/configuracoes/configuracoes_module.dart';
 import 'package:whatsflutter/app/shared/auth/auth_controller.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository_interface.dart';
@@ -17,6 +19,7 @@ class AppModule extends MainModule {
     //Bind((i) => AppController()),
     Bind((i) => LoginModule()),
     Bind((i) => AuthController()),
+    Bind((i) => ConfiguracoesController()),
     Bind<IAuthRepository>((i) => AuthRepository()),
   ];
 
@@ -26,6 +29,7 @@ class AppModule extends MainModule {
     Router('/login', module: LoginModule()),
     Router('/home', module: HomeModule()),
     Router('/cadastro', module: CadastroModule()),
+    Router('/conf', module: ConfiguracoesModule()),
   ];
 
 
