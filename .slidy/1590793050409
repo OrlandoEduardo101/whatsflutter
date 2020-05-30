@@ -1,0 +1,4 @@
+lib/app/app/app_widget.dart
+test/app/app/app_widget_test.dart
+lib/app/app/app_bloc.dart
+test/app/app/app_bloc_test.dart
