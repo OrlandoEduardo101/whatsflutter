@@ -1,4 +1,4 @@
-/*import 'package:mobx/mobx.dart';
+import 'package:mobx/mobx.dart';
 
 part 'conversas_controller.g.dart';
 
@@ -13,4 +13,3 @@ abstract class _ConversasControllerBase with Store {
     value++;
   }
 }
-*/

@@ -35,6 +35,10 @@ abstract class _AuthControllerBase with Store{
     user = await _authRepository.getEmailPasswordLogin(email, password);
   }
 
+  Future getCreateUser(String email, String password) async {
+    user = await _authRepository.getCreateUser(email, password);
+  }
+
   Future logOut(){
     return _authRepository.getLogout();
   }

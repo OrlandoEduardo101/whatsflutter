@@ -67,4 +67,17 @@ class AuthRepository implements IAuthRepository{
     return await _auth.signOut();
   }
 
+  @override
+  Future<FirebaseUser> getCreateUser(String email, String password) async {
+    await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password
+    ).then((user){
+      return user;
+    }).catchError((error){
+      return error;
+    });
+  }
+
 }
+

@@ -81,5 +81,9 @@ abstract class _LoginControllerBase with Store {
 
   }
 
+  toCadastro(){
+    Get.toNamed('/cadastro');
+  }
+
 
 }

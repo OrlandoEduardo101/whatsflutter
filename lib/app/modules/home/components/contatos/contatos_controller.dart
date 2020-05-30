@@ -1,4 +1,4 @@
-/*import 'package:mobx/mobx.dart';
+import 'package:mobx/mobx.dart';
 
 part 'contatos_controller.g.dart';
 
@@ -13,4 +13,3 @@ abstract class _ContatosControllerBase with Store {
     value++;
   }
 }
-*/

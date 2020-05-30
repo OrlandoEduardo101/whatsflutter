@@ -5,8 +5,15 @@ class UserModel {
   String _email;
   String _uid;
   String _token;
+  String _password;
   bool _present;
   bool _isAdm;
+
+  String get password => _password;
+
+  set password(String value) {
+    _password = value;
+  }
 
   UserModel();
 
@@ -60,5 +67,11 @@ class UserModel {
 
   set present(bool value) {
     _present = value;
+  }
+
+  bool get isAdm => _isAdm;
+
+  set isAdm(bool value) {
+    _isAdm = value;
   }
 }

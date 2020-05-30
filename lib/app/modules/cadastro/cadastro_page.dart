@@ -1,39 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/shared/utils/res.dart';
-import 'components/textError/textError_widget.dart';
-import 'login_controller.dart';
+import 'cadastro_controller.dart';
 
-class LoginPage extends StatefulWidget {
+class CadastroPage extends StatefulWidget {
   final String title;
-  const LoginPage({Key key, this.title = "Login"}) : super(key: key);
+  const CadastroPage({Key key, this.title = "Cadastro"}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _CadastroPageState createState() => _CadastroPageState();
 }
 
-class _LoginPageState extends ModularState<LoginPage, LoginController> {
+class _CadastroPageState
+    extends ModularState<CadastroPage, CadastroController> {
   //use 'controller' variable to access controller
-
-  final LoginController controller = Modular.get();
-  final TextErrorWidget textErrorWidget = TextErrorWidget();
-
-  //TextEditingController _controllerUser = TextEditingController();
-  //TextEditingController _controllerPassword = TextEditingController();
-  IconData _account = IconData(59475, fontFamily: 'MaterialIcons');
-  IconData _lock = IconData(59545, fontFamily: 'MaterialIcons');
-  Image _account_circle = Image.asset('icons/utilizadorC.png');
-  Image _logo_recode = Image.asset('image/logo_jr.png',);
-
-
 
   @override
   Widget build(BuildContext context) {
-    //Color verdeRecode = verdeRecode;
-    return  Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Cadastro"),
+      ),
       body: Container(
         decoration: BoxDecoration(color: Color(0xff075E54)),
         padding: EdgeInsets.all(16),
@@ -45,7 +33,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 32),
                   child: Image.asset(
-                    Res.logo,
+                    Res.usuario,
                     width: 200,
                     height: 150,
                   ),
@@ -54,6 +42,22 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   padding: EdgeInsets.only(bottom: 8),
                   child: TextField(
                     autofocus: true,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Nome",
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                    onChanged: controller.setNome,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: TextField(
+                    //autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
@@ -78,43 +82,36 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(32))),
-                  onChanged: controller.setPassword,
+                  onChanged: controller.setSenha,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
-                  child: Observer(
-                      builder: (_){
-                        return RaisedButton(
-                            child: Text(
-                              "Entrar",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            color: Colors.green,
-                            padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32)
-                            ),
-                            onPressed: controller.loginWithEmail
-                        );
-
-                      }
-                  ),
-                ),
-                Center(
-                  child: GestureDetector(
-                    child: Text(
-                      "Não tem conta? cadastre-se!",
-                      style: TextStyle(
-                          color: Colors.white
+                  child: Observer(builder: (_){
+                    return RaisedButton(
+                      child: Text(
+                        "Cadastrar",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                    ),
-                    onTap: controller.toCadastro,
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(top:5),
-                    child:textErrorWidget
-                ),
+                      color: Colors.green,
+                      padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32)
+                      ),
+                      onPressed: controller.validarCampos,
+                    );
+                  })),
+                Center(
+                  child: Observer(builder: (_){
+                    return Text(
+                      controller.msgError,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20
+                      ),
+                    );
+                  })
+                )
               ],
             ),
           ),
@@ -122,4 +119,4 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
       ),
     );
   }
-}
+  }
