@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
 
-  String name;
+  String nome;
   String nick;
   String urlIMG;
   String email;
@@ -14,11 +14,11 @@ class UserModel {
   String location;
   final DocumentReference reference;
 
-  UserModel({this.name, this.nick, this.email, this.uid, this.present, this.isAdm, this.reference, this.urlIMG});
+  UserModel({this.nome, this.nick, this.email, this.uid, this.present, this.isAdm, this.reference, this.urlIMG});
 
   Map<String, dynamic> toMap(){
     Map<String, dynamic> map = {
-      "name" : this.name,
+      "name" : this.nome,
       //"nick" : this.nick,
       "email" : this.email,
       "urlIMG" : this.urlIMG,
@@ -31,7 +31,7 @@ class UserModel {
 
   Map<String, dynamic> fromSnapshot(data){
     Map<String, dynamic> map = {
-      "name" : data['name'],
+      "nome" : data['nome'],
       //"nick" : data['nick'],
       "email" : data['email'],
       "urlIMG" : data['urlIMG'],
@@ -44,7 +44,7 @@ class UserModel {
 
   factory UserModel.fromDoc(DocumentSnapshot doc) {
     return UserModel(
-          name: doc['name'],
+          nome: doc['nome'],
           //nick : doc['nick'],
           email : doc['email'],
           urlIMG : doc['urlIMG'],

@@ -12,13 +12,13 @@ mixin _$LoginController on _LoginControllerBase, Store {
   final _$dataAtom = Atom(name: '_LoginControllerBase.data');
 
   @override
-  ObservableStream<UserModel> get data {
+  dynamic get data {
     _$dataAtom.reportRead();
     return super.data;
   }
 
   @override
-  set data(ObservableStream<UserModel> value) {
+  set data(dynamic value) {
     _$dataAtom.reportWrite(value, super.data, () {
       super.data = value;
     });
@@ -84,21 +84,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$idLogAtom = Atom(name: '_LoginControllerBase.idLog');
-
-  @override
-  String get idLog {
-    _$idLogAtom.reportRead();
-    return super.idLog;
-  }
-
-  @override
-  set idLog(String value) {
-    _$idLogAtom.reportWrite(value, super.idLog, () {
-      super.idLog = value;
-    });
-  }
-
   final _$loginWithEmailAsyncAction =
       AsyncAction('_LoginControllerBase.loginWithEmail');
 
@@ -119,8 +104,8 @@ mixin _$LoginController on _LoginControllerBase, Store {
       AsyncAction('_LoginControllerBase.verifyUserData');
 
   @override
-  Future<dynamic> verifyUserData() {
-    return _$verifyUserDataAsyncAction.run(() => super.verifyUserData());
+  Future<dynamic> verifyUserData(String uid) {
+    return _$verifyUserDataAsyncAction.run(() => super.verifyUserData(uid));
   }
 
   final _$_LoginControllerBaseActionController =
@@ -149,25 +134,13 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
-  dynamic getIdLog() {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.getIdLog');
-    try {
-      return super.getIdLog();
-    } finally {
-      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 data: ${data},
 load: ${load},
 hasData: ${hasData},
 email: ${email},
-password: ${password},
-idLog: ${idLog}
+password: ${password}
     ''';
   }
 }

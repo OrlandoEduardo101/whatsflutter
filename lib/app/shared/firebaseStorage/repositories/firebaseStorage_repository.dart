@@ -8,10 +8,10 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   FirebaseStorageRepository(this.firestore);
 
   @override
-  Stream<UserModel> getUserData(String id) {
-    return firestore.collection('users').document('UDgDS7tlsHh12hEmi6B6Gz2fXvA2').snapshots().map((doc){
-      return UserModel.fromDoc(doc);
-    });
+  Future<Map<String, dynamic>> getUserData(String id) async {
+    print("firestore: "+firestore.toString()+id);
+    DocumentSnapshot snapshot = await firestore.collection('users').document(id).get();
+      print("userDatas: " +  snapshot.data.toString());
+      return snapshot.data;
+    }
   }
-
-}

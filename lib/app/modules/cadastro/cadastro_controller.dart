@@ -45,7 +45,7 @@ abstract class _CadastroControllerBase with Store {
 
         if (senha.isNotEmpty && senha.length>5) {
           UserModel usuario = UserModel();
-          usuario.name = nome;
+          usuario.nome = nome;
           usuario.email = email;
           usuario.password = senha;
           cadastrarUser(usuario);

@@ -31,10 +31,11 @@ abstract class _ConfiguracoesControllerBase with Store {
   }
 
   @observable
-  ObservableStream<UserModel> dados;
+  var dados;
 
   @observable
   TextEditingController controllerNome = TextEditingController();
+
   @observable
   File _img;
   @observable
@@ -43,6 +44,7 @@ abstract class _ConfiguracoesControllerBase with Store {
   String urlRec;
 
   _ConfiguracoesControllerBase(this.repository){
+    getIdLog();
     recuperarDados();
   }
 
@@ -116,9 +118,12 @@ abstract class _ConfiguracoesControllerBase with Store {
   }
 
   @action
-  recuperarDados(){
-    dados = repository.getUserData(getIdLog()).asObservable();
-    userData = user.fromSnapshot(dados.data);
+  recuperarDados() async {
+    dados = await repository.getUserData(idLog);
+    print("id:" +idLog);
+    //userData = user.fromSnapshot(dados);
+    controllerNome.text = dados['nome'];
+    print("dadoss: " + dados);
   }
 
     /*FirebaseUser userLog = await auth.getUser();

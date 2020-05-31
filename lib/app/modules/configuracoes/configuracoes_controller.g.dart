@@ -27,13 +27,13 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
   final _$dadosAtom = Atom(name: '_ConfiguracoesControllerBase.dados');
 
   @override
-  ObservableStream<UserModel> get dados {
+  dynamic get dados {
     _$dadosAtom.reportRead();
     return super.dados;
   }
 
   @override
-  set dados(ObservableStream<UserModel> value) {
+  set dados(dynamic value) {
     _$dadosAtom.reportWrite(value, super.dados, () {
       super.dados = value;
     });
@@ -124,6 +124,14 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
     return _$_recuperarURLAsyncAction.run(() => super._recuperarURL(snapshot));
   }
 
+  final _$recuperarDadosAsyncAction =
+      AsyncAction('_ConfiguracoesControllerBase.recuperarDados');
+
+  @override
+  Future recuperarDados() {
+    return _$recuperarDadosAsyncAction.run(() => super.recuperarDados());
+  }
+
   final _$_ConfiguracoesControllerBaseActionController =
       ActionController(name: '_ConfiguracoesControllerBase');
 
@@ -155,17 +163,6 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
         .startAction(name: '_ConfiguracoesControllerBase.atualizarNome');
     try {
       return super.atualizarNome();
-    } finally {
-      _$_ConfiguracoesControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic recuperarDados() {
-    final _$actionInfo = _$_ConfiguracoesControllerBaseActionController
-        .startAction(name: '_ConfiguracoesControllerBase.recuperarDados');
-    try {
-      return super.recuperarDados();
     } finally {
       _$_ConfiguracoesControllerBaseActionController.endAction(_$actionInfo);
     }
