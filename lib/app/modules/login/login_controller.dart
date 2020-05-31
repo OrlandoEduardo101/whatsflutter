@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 import 'package:whatsflutter/app/modules/login/stores/exception_store.dart';
 import 'package:whatsflutter/app/shared/auth/auth_controller.dart';
+import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseStorage_repository_interface.dart';
 import 'package:whatsflutter/app/shared/utils/constants.dart';
 
 import 'components/textError/textError_controller.dart';
@@ -18,6 +19,9 @@ abstract class _LoginControllerBase with Store {
 
   AuthController auth = Modular.get();
   Future<FirebaseUser> userCurrent;
+  final IFirebaseStorageRepository repository;
+  UserModel user = UserModel();
+  var userData;
 
   UserModel userLogged = UserModel();
 
@@ -25,10 +29,18 @@ abstract class _LoginControllerBase with Store {
   TextErrorController textErrorController = TextErrorController();
 
   @observable
+  ObservableStream<UserModel> data;
+
+  @observable
   bool load = false;
 
   @observable
+  bool hasData = false;
+
+  @observable
   String email = '';
+
+  _LoginControllerBase({this.repository});
 
   @action
   setEmail(String value) => email = value;
@@ -39,13 +51,29 @@ abstract class _LoginControllerBase with Store {
   @action
   setPassword(String value) => password = value;
 
+  @observable
+  String idLog = '';
+
+  @action
+  getIdLog(){
+    idLog = auth.user.uid;
+    return idLog;
+  }
+
   @action
   Future loginWithEmail() async {
       textErrorController.setColor(verdeRecode);
       exceptionStore.setError('Carregando...');
       FirebaseUser user = await auth.loginWithEmail(email, password).then((_){
+      verifyUserData();
       load = true;
-      Modular.to.pushReplacementNamed('/home');
+      if(!hasData){
+        print("data: "+data.toString());
+        toCadastro();
+      }else{
+        print("data: "+data.toString());
+        Get.offAllNamed('/home');
+      }
     } ).catchError((e){
       load = false;
       textErrorController.setColor(Colors.red);
@@ -77,8 +105,17 @@ abstract class _LoginControllerBase with Store {
   }
 
 
-  getUserData(){
-
+  @action
+  Future verifyUserData() async {
+    try{
+      data = repository.getUserData(getIdLog()).asObservable();
+      userData = user.fromSnapshot(data.data);
+      print("data:${data.isEmpty.toString()}");
+      hasData = true;
+    }catch(e){
+      hasData = false;
+      print("error : $e");
+    }
   }
 
   toCadastro(){

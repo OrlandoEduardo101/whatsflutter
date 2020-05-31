@@ -1,77 +1,58 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
 
-  String _name;
-  String _nick;
-  String _email;
-  String _uid;
-  String _token;
-  String _password;
-  bool _present;
-  bool _isAdm;
+  String name;
+  String nick;
+  String urlIMG;
+  String email;
+  String uid;
+  String token;
+  String password;
+  bool present = false;
+  bool isAdm = false;
+  String location;
+  final DocumentReference reference;
 
-  String get password => _password;
+  UserModel({this.name, this.nick, this.email, this.uid, this.present, this.isAdm, this.reference, this.urlIMG});
 
-  set password(String value) {
-    _password = value;
+  Map<String, dynamic> toMap(){
+    Map<String, dynamic> map = {
+      "name" : this.name,
+      //"nick" : this.nick,
+      "email" : this.email,
+      "urlIMG" : this.urlIMG,
+      //"uid" : this.uid,
+      //"present" : this.present,
+      //"isAdm" : this.isAdm
+    };
+    return map;
   }
 
-  UserModel();
+  Map<String, dynamic> fromSnapshot(data){
+    Map<String, dynamic> map = {
+      "name" : data['name'],
+      //"nick" : data['nick'],
+      "email" : data['email'],
+      "urlIMG" : data['urlIMG'],
+      //"uid" : data['uid'],
+      //"present" : data['present'],
+      //"isAdm" : data['isAdm']
+    };
+    return map;
+  }
 
-
-
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromDoc(DocumentSnapshot doc) {
     return UserModel(
-        //field: json[''],
+          name: doc['name'],
+          //nick : doc['nick'],
+          email : doc['email'],
+          urlIMG : doc['urlIMG'],
+         // uid : doc['uid'],
+         // present : doc['present'],
+         // isAdm : doc['isAdm'],
+          reference: doc.reference,
         );
   }
 
-  Map<String, dynamic> toJson() => {
-    "name" : _name,
-    "nick" : _nick,
-    "email" : _email,
-    "uid" : _uid,
-    "present" : _present
-  };
-
-  String get name => _name;
-
-  set name(String value) {
-    _name = value;
-  }
-
-  String get nick => _nick;
-
-  set nick(String value) {
-    _nick = value;
-  }
-
-  String get email => _email;
-
-  set email(String value) {
-    _email = value;
-  }
-
-  String get uid => _uid;
-
-  set uid(String value) {
-    _uid = value;
-  }
-
-  String get token => _token;
-
-  set token(String value) {
-    _token = value;
-  }
-
-  bool get present => _present;
-
-  set present(bool value) {
-    _present = value;
-  }
-
-  bool get isAdm => _isAdm;
-
-  set isAdm(bool value) {
-    _isAdm = value;
-  }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/app_controller.dart';
@@ -6,6 +7,8 @@ import 'package:whatsflutter/app/modules/configuracoes/configuracoes_module.dart
 import 'package:whatsflutter/app/shared/auth/auth_controller.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository_interface.dart';
+import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseStorage_repository.dart';
+import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseStorage_repository_interface.dart';
 import 'package:whatsflutter/app/splash/splash_page.dart';
 
 import 'app_widget.dart';
@@ -19,8 +22,9 @@ class AppModule extends MainModule {
     //Bind((i) => AppController()),
     Bind((i) => LoginModule()),
     Bind((i) => AuthController()),
-    Bind((i) => ConfiguracoesController()),
+    Bind((i) => ConfiguracoesController(i.get())),
     Bind<IAuthRepository>((i) => AuthRepository()),
+    Bind<IFirebaseStorageRepository>((i) => FirebaseStorageRepository(Firestore.instance)),
   ];
 
   @override

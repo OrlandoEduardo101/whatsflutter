@@ -9,6 +9,21 @@ part of 'login_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginController on _LoginControllerBase, Store {
+  final _$dataAtom = Atom(name: '_LoginControllerBase.data');
+
+  @override
+  ObservableStream<UserModel> get data {
+    _$dataAtom.reportRead();
+    return super.data;
+  }
+
+  @override
+  set data(ObservableStream<UserModel> value) {
+    _$dataAtom.reportWrite(value, super.data, () {
+      super.data = value;
+    });
+  }
+
   final _$loadAtom = Atom(name: '_LoginControllerBase.load');
 
   @override
@@ -21,6 +36,21 @@ mixin _$LoginController on _LoginControllerBase, Store {
   set load(bool value) {
     _$loadAtom.reportWrite(value, super.load, () {
       super.load = value;
+    });
+  }
+
+  final _$hasDataAtom = Atom(name: '_LoginControllerBase.hasData');
+
+  @override
+  bool get hasData {
+    _$hasDataAtom.reportRead();
+    return super.hasData;
+  }
+
+  @override
+  set hasData(bool value) {
+    _$hasDataAtom.reportWrite(value, super.hasData, () {
+      super.hasData = value;
     });
   }
 
@@ -54,6 +84,21 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$idLogAtom = Atom(name: '_LoginControllerBase.idLog');
+
+  @override
+  String get idLog {
+    _$idLogAtom.reportRead();
+    return super.idLog;
+  }
+
+  @override
+  set idLog(String value) {
+    _$idLogAtom.reportWrite(value, super.idLog, () {
+      super.idLog = value;
+    });
+  }
+
   final _$loginWithEmailAsyncAction =
       AsyncAction('_LoginControllerBase.loginWithEmail');
 
@@ -68,6 +113,14 @@ mixin _$LoginController on _LoginControllerBase, Store {
   @override
   Future<dynamic> loginWithGoogle() {
     return _$loginWithGoogleAsyncAction.run(() => super.loginWithGoogle());
+  }
+
+  final _$verifyUserDataAsyncAction =
+      AsyncAction('_LoginControllerBase.verifyUserData');
+
+  @override
+  Future<dynamic> verifyUserData() {
+    return _$verifyUserDataAsyncAction.run(() => super.verifyUserData());
   }
 
   final _$_LoginControllerBaseActionController =
@@ -96,11 +149,25 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
+  dynamic getIdLog() {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.getIdLog');
+    try {
+      return super.getIdLog();
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+data: ${data},
 load: ${load},
+hasData: ${hasData},
 email: ${email},
-password: ${password}
+password: ${password},
+idLog: ${idLog}
     ''';
   }
 }

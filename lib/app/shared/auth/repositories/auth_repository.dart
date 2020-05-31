@@ -11,23 +11,9 @@ class AuthRepository implements IAuthRepository{
 
   @override
   Future<FirebaseUser> getEmailPasswordLogin(String email, String password) async{
-
     final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
         email:email, password:password)).user;
-
     return user;
-
-    /*_auth.signInWithEmailAndPassword(email: email, password: password)
-        .then((value){
-        print("signed in " + value.user.displayName);
-        return value.user;
-    }).catchError((e){
-        print("errorAuth:"+e.toString());
-      }
-
-    );*/
-
-
   }
 
   @override
@@ -59,7 +45,7 @@ class AuthRepository implements IAuthRepository{
 
   @override
   Future<FirebaseUser> getUser() {
-    return FirebaseAuth.instance.currentUser();
+    return (FirebaseAuth.instance.currentUser());
   }
 
   @override
