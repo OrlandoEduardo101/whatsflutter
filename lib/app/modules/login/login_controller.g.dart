@@ -39,20 +39,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$hasDataAtom = Atom(name: '_LoginControllerBase.hasData');
-
-  @override
-  bool get hasData {
-    _$hasDataAtom.reportRead();
-    return super.hasData;
-  }
-
-  @override
-  set hasData(bool value) {
-    _$hasDataAtom.reportWrite(value, super.hasData, () {
-      super.hasData = value;
-    });
-  }
 
   final _$emailAtom = Atom(name: '_LoginControllerBase.email');
 
@@ -138,7 +124,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     return '''
 data: ${data},
 load: ${load},
-hasData: ${hasData},
 email: ${email},
 password: ${password}
     ''';

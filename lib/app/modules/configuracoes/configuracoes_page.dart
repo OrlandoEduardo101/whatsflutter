@@ -32,10 +32,10 @@ class _ConfiguracoesPageState
         title: Text("Configurações"),
       ),
       body: Observer(builder: (_){
-        return Container(
-          padding: EdgeInsets.all(16),
-          child: Center(
-            child: SingleChildScrollView(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Center(
               child: Column(
                 children: <Widget>[
                   Container(
@@ -45,7 +45,7 @@ class _ConfiguracoesPageState
                   Observer(builder:(_){
                     return CircleAvatar(
                       radius: 100,
-                      backgroundImage: controller.dados['urlIMG'] != null ? NetworkImage(controller.dados['urlIMG']) : null,
+                      backgroundImage: controller.dados != null ? NetworkImage(controller.dados['urlIMG']) : null,
                       backgroundColor: Colors.grey,
                     );
                   }),
