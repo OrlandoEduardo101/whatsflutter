@@ -4,7 +4,7 @@ import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 
 abstract class IFirebaseStorageRepository{
       Future<Map<String, dynamic>> getUserData(String id);
-      Future<Map<String, dynamic>> setUserData(String id, Map<String, dynamic> );
+      Future<Map<String, dynamic>> setUserData(String id, Map<String, dynamic> Map);
       StorageUploadTask uploadIMG(String id, File img);
       updateURL(String url, Map<String, dynamic> dadosAtt);
       updateName(String nome, Map<String, dynamic> dadosAtt);

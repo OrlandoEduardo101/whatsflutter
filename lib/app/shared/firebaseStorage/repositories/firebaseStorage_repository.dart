@@ -19,7 +19,7 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
     }
 
   @override
-  Future<Map<String, dynamic>> setUserData(String id, Map<String, dynamic>) {
+  Future<Map<String, dynamic>> setUserData(String id, Map<String, dynamic> Map) {
     firestore.document(id)
         .setData(Map);
   }
