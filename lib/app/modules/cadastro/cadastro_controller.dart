@@ -3,13 +3,14 @@ import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 import 'package:whatsflutter/app/shared/auth/auth_controller.dart';
+import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseStorage_repository_interface.dart';
 
 part 'cadastro_controller.g.dart';
 
 class CadastroController = _CadastroControllerBase with _$CadastroController;
 
 abstract class _CadastroControllerBase with Store {
-
+  final IFirebaseStorageRepository repository;
   AuthController auth = Modular.get();
 
   @observable
@@ -20,6 +21,8 @@ abstract class _CadastroControllerBase with Store {
 
   @observable
   String nome = '';
+
+  _CadastroControllerBase(this.repository);
 
   @action
   setNome(value) => nome = value;
@@ -49,9 +52,9 @@ abstract class _CadastroControllerBase with Store {
           usuario.email = email;
           usuario.password = senha;
           cadastrarUser(usuario);
-          /*setState(() {
-            _msgError = "Sucesso";
-          });*/
+
+            msgError = "Sucesso";
+
         }  else {
             return msgError = "Senha precisa ter pelo menos 6 caracteres";
         }
@@ -68,15 +71,16 @@ abstract class _CadastroControllerBase with Store {
   cadastrarUser(UserModel usuario){
 
     auth.getCreateUser(usuario.email, usuario.password).then((firebaseUser){
+      repository.setUserData(firebaseUser.user.id, usuario.toMap());
 
     /*Firestore db = Firestore.instance;
     db.collection("users")
         .document(firebaseUser.user.uid)
         .setData(usuario.toMap());*/
 
-    Get.offAllNamed("/home");
+      Get.offAllNamed("/home");
 
-    msgError = "Sucesso";
+      msgError = "Sucesso";
 
     }).catchError((error){
     print("Erro:" + error.toString());

@@ -39,7 +39,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-
   final _$emailAtom = Atom(name: '_LoginControllerBase.email');
 
   @override

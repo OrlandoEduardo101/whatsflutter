@@ -5,7 +5,7 @@ import 'package:whatsflutter/app/modules/cadastro/cadastro_page.dart';
 class CadastroModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => CadastroController()),
+        Bind((i) => CadastroController(i.get())),
       ];
 
   @override

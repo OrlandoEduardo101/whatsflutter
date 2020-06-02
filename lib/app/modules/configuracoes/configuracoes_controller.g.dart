@@ -55,18 +55,18 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
     });
   }
 
-  final _$_imgAtom = Atom(name: '_ConfiguracoesControllerBase._img');
+  final _$imgAtom = Atom(name: '_ConfiguracoesControllerBase.img');
 
   @override
-  File get _img {
-    _$_imgAtom.reportRead();
-    return super._img;
+  File get img {
+    _$imgAtom.reportRead();
+    return super.img;
   }
 
   @override
-  set _img(File value) {
-    _$_imgAtom.reportWrite(value, super._img, () {
-      super._img = value;
+  set img(File value) {
+    _$imgAtom.reportWrite(value, super.img, () {
+      super.img = value;
     });
   }
 
@@ -174,6 +174,7 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
 idLog: ${idLog},
 dados: ${dados},
 controllerNome: ${controllerNome},
+img: ${img},
 subindo: ${subindo},
 urlRec: ${urlRec}
     ''';

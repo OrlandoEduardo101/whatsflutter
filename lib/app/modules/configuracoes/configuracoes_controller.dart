@@ -37,7 +37,7 @@ abstract class _ConfiguracoesControllerBase with Store {
   TextEditingController controllerNome = TextEditingController();
 
   @observable
-  File _img;
+  File img;
   @observable
   bool subindo = false;
   @observable
@@ -61,8 +61,8 @@ abstract class _ConfiguracoesControllerBase with Store {
       default:
     }
 
-      _img = imagemSelecionada;
-      if (_img != null) {
+      img = imagemSelecionada;
+      if (img != null) {
         subindo = true;
         _uploadIMG();
       }
@@ -70,12 +70,14 @@ abstract class _ConfiguracoesControllerBase with Store {
   }
   @action
   Future _uploadIMG()async{
-    FirebaseStorage storage = FirebaseStorage.instance;
-    StorageReference raiz = storage.ref();
-    StorageReference arq = raiz.child("perfil").child(idLog+".jpg");
+    //FirebaseStorage storage = FirebaseStorage.instance;
+   // StorageReference raiz = storage.ref();
+    //StorageReference arq = raiz.child("perfil").child(idLog+".jpg");
     //upload img
-    StorageUploadTask task = arq.putFile(_img);
+    //StorageUploadTask task = arq.putFile(_img);
     //controle progresso
+    var task = repository.uploadIMG(idLog, img);
+
     task.events.listen((StorageTaskEvent event) {
       if (event.type == StorageTaskEventType.progress) {
 
@@ -84,7 +86,6 @@ abstract class _ConfiguracoesControllerBase with Store {
       }  else if(event.type == StorageTaskEventType.success){
 
           subindo = false;
-
       }
     });
     //recuperar url da img
@@ -92,6 +93,7 @@ abstract class _ConfiguracoesControllerBase with Store {
       _recuperarURL(value);
     });
   }
+
   @action
   Future _recuperarURL(StorageTaskSnapshot snapshot) async{
     String url = await snapshot.ref.getDownloadURL();
@@ -99,22 +101,26 @@ abstract class _ConfiguracoesControllerBase with Store {
     _atualizarURL(url);
     urlRec = url;
   }
+
   @action
   _atualizarURL(String url){
-    Firestore db = Firestore.instance;
+    //Firestore db = Firestore.instance;
     Map<String, dynamic> dadosAtt = {
       "urlIMG" : url
     };
-    db.collection("users").document(getIdLog()).updateData(dadosAtt);
+    repository.updateData(idLog, dadosAtt);
+    //db.collection("users").document(getIdLog()).updateData(dadosAtt);
   }
+
   @action
    atualizarNome(){
     String nome = controllerNome.text;
-    Firestore db = Firestore.instance;
+    //Firestore db = Firestore.instance;
     Map<String, dynamic> dadosAtt = {
       "nome" : nome
     };
-    db.collection("users").document(idLog).updateData(dadosAtt);
+    repository.updateData(idLog, dadosAtt);
+    //db.collection("users").document(idLog).updateData(dadosAtt);
   }
 
   @action
