@@ -29,11 +29,11 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   }
 
   @override
-  setUserData(String id, Map<String, dynamic> Map) {
-    print('nome'+Map['nome']);
+  setUserData(String id, Map<String, dynamic> map) {
+    print('nome'+map['nome']);
     print('uid3'+id);
-    firestore.document(id)
-        .setData(Map);
+    firestore.collection('users').document(id)
+        .setData(map);
   }
 
   @override

@@ -4,7 +4,7 @@ class UserModel {
 
   String nome;
   String nick;
-  String urlIMG;
+  String urlIMG = '0';
   String email;
   String uid;
   String token;

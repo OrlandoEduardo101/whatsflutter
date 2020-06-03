@@ -25,6 +25,7 @@ class AppModule extends MainModule {
     Bind((i) => LoginModule()),
     Bind((i) => AuthController()),
     Bind((i) => LoginController(i.get())),
+    Bind((i) => CadastroController(i.get())),
     Bind((i) => ConfiguracoesController(i.get())),
     //Bind((i) => CadastroController(i.get())),
     Bind<IAuthRepository>((i) => AuthRepository()),

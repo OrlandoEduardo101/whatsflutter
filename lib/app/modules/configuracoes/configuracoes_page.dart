@@ -24,7 +24,7 @@ class _ConfiguracoesPageState
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller.recuperarDados();
+  //  controller.recuperarDados();
   }
 
   @override
@@ -35,22 +35,20 @@ class _ConfiguracoesPageState
       appBar: AppBar(
         title: Text("Configurações"),
       ),
-
       body: Observer(builder: (_){
-
-        UserModel usuario = controller.dados.data;
-        controller.controllerNome.text = usuario.nome;
-
        if(controller.dados.hasError){ print("errorrr");
          return Center(
            child: RaisedButton(onPressed: controller.recuperarDados, child: Text('Tente novamente'),),
          );
-       }else if(controller.dados == null || controller.dados.data.toString() == 'null'){
+       }
+       if(controller.dados.data == null){
          print("null");
          return Center(
            child: CircularProgressIndicator(),
          );
        }else { print("tem dados");
+       UserModel usuario = controller.dados.data;
+       controller.controllerNome.text = usuario.nome;
          return SingleChildScrollView(
            child: Container(
              padding: EdgeInsets.all(16),

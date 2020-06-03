@@ -19,7 +19,6 @@ abstract class _ConfiguracoesControllerBase with Store {
   final IFirebaseStorageRepository repository;
   AuthController auth = Modular.get();
   UserModel user = UserModel();
-  var userData;
 
   @observable
   String idLog = '';
@@ -56,7 +55,7 @@ abstract class _ConfiguracoesControllerBase with Store {
     File imagemSelecionada;
     switch(origem) {
       case "cam":
-        imagemSelecionada = await ImagePicker.pickImage(source: ImageSource.camera);
+        imagemSelecionada = File((await ImagePicker().getImage(source: ImageSource.camera)).path);
         break;
       case "galeria":
         imagemSelecionada = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -73,14 +72,15 @@ abstract class _ConfiguracoesControllerBase with Store {
   }
   @action
   Future _uploadIMG()async{
-    //FirebaseStorage storage = FirebaseStorage.instance;
-   // StorageReference raiz = storage.ref();
-    //StorageReference arq = raiz.child("perfil").child(idLog+".jpg");
-    //upload img
-    //StorageUploadTask task = arq.putFile(_img);
-    //controle progresso
-    var task = repository.uploadIMG(idLog, img);
+    /*FirebaseStorage storage = FirebaseStorage.instance;
+    StorageReference raiz = storage.ref();
+    StorageReference arq = raiz.child("perfil").child(idLog+".jpg");
 
+    StorageUploadTask task = arq.putFile(_img);*/
+
+    //upload img
+    var task = repository.uploadIMG(idLog, img);
+    //controle progresso
     task.events.listen((StorageTaskEvent event) {
       if (event.type == StorageTaskEventType.progress) {
 
@@ -130,10 +130,8 @@ abstract class _ConfiguracoesControllerBase with Store {
   recuperarDados() {
     dados =  repository.getUserData(idLog).asObservable();
     print("id:" +idLog);
-    //userData = user.fromSnapshot(dados);
-    //controllerNome.text = dados;
     print("dadoss: " + dados.data.toString());
-  }
+
 
     /*FirebaseUser userLog = await auth.getUser();
     _idLog = userLog.uid;
@@ -145,9 +143,9 @@ abstract class _ConfiguracoesControllerBase with Store {
     if (dados["urlIMG"] != null) {
       //_urlRec = dados["urlIMG"];
         urlRec = dados["urlIMG"];
-    }
+    }*/
 
-  }*/
+  }
 
   }
 

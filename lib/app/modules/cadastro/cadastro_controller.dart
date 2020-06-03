@@ -53,6 +53,7 @@ abstract class _CadastroControllerBase with Store {
           usuario.nome = nome;
           usuario.email = email;
           usuario.password = senha;
+          usuario.urlIMG = "";
           cadastrarUser(usuario);
 
             //msgError = "Sucesso";
@@ -81,7 +82,7 @@ abstract class _CadastroControllerBase with Store {
         .document(firebaseUser.user.uid)
         .setData(usuario.toMap());*/
 
-     // msgError = "Sucesso";
+      msgError = "carregando...";
 
     }).catchError((error){
     print("Erro:" + error.toString());
@@ -94,7 +95,17 @@ abstract class _CadastroControllerBase with Store {
   @action
   Future setUserData(UserModel usuario, String id) {
     print('uid2:' + auth.user.uid);
-    repository.setUserData(auth.user.uid, usuario.toMap());
+    print("Name: "+usuario.nome);
+    //var map = usuario.toMap();
+
+    Map<String, dynamic> dadosSet = {
+      "nome" : usuario.nome,
+      "email" : usuario.email,
+      "urlIMG" : usuario.urlIMG
+    };
+
+    //print("Namew: "+map['nome'].toString());
+    repository.setUserData(auth.user.uid, dadosSet);
     Get.offAllNamed("/home");
   }
 

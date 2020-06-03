@@ -59,18 +59,18 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/img/fabuloso.jpg
+    - assets/img/jesus.jpg
     - assets/img/logo.png
-    - assets/img/usuario.png
+    - assets/img/marinho.jpg
+    - assets/img/neves.jpg
     - assets/img/perfil1.jpg
     - assets/img/perfil2.jpg
     - assets/img/perfil3.jpg
     - assets/img/perfil4.jpg
     - assets/img/perfil5.jpg
-    - assets/img/neves.jpg
-    - assets/img/jesus.jpg
-    - assets/img/marinho.jpg
     - assets/img/pombo.jpg
-    - assets/img/fabuloso.jpg
+    - assets/img/usuario.png
   # assets-generator-begin
   # assets/img/*
   # assets-generator-end
