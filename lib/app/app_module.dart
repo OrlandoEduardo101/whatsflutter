@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/app_controller.dart';
 import 'package:whatsflutter/app/modules/configuracoes/configuracoes_controller.dart';
 import 'package:whatsflutter/app/modules/configuracoes/configuracoes_module.dart';
+import 'package:whatsflutter/app/modules/login/login_controller.dart';
 import 'package:whatsflutter/app/shared/auth/auth_controller.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository_interface.dart';
@@ -12,6 +13,7 @@ import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseSto
 import 'package:whatsflutter/app/splash/splash_page.dart';
 
 import 'app_widget.dart';
+import 'modules/cadastro/cadastro_controller.dart';
 import 'modules/cadastro/cadastro_module.dart';
 import 'modules/home/home_module.dart';
 import 'modules/login/login_module.dart';
@@ -22,7 +24,9 @@ class AppModule extends MainModule {
     //Bind((i) => AppController()),
     Bind((i) => LoginModule()),
     Bind((i) => AuthController()),
+    Bind((i) => LoginController(i.get())),
     Bind((i) => ConfiguracoesController(i.get())),
+    //Bind((i) => CadastroController(i.get())),
     Bind<IAuthRepository>((i) => AuthRepository()),
     Bind<IFirebaseStorageRepository>((i) => FirebaseStorageRepository(Firestore.instance)),
   ];

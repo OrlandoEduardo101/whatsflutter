@@ -30,8 +30,8 @@ abstract class _ConfiguracoesControllerBase with Store {
     return idLog;
   }
 
-  @observable
-  var dados;
+  //@observable
+  //var dados;
 
   @observable
   TextEditingController controllerNome = TextEditingController();
@@ -42,6 +42,9 @@ abstract class _ConfiguracoesControllerBase with Store {
   bool subindo = false;
   @observable
   String urlRec;
+
+  @observable
+  ObservableStream<UserModel> dados;
 
   _ConfiguracoesControllerBase(this.repository){
     getIdLog();
@@ -124,12 +127,12 @@ abstract class _ConfiguracoesControllerBase with Store {
   }
 
   @action
-  recuperarDados() async {
-    dados = await repository.getUserData(idLog);
+  recuperarDados() {
+    dados =  repository.getUserData(idLog).asObservable();
     print("id:" +idLog);
     //userData = user.fromSnapshot(dados);
-    controllerNome.text = dados['nome'];
-    print("dadoss: " + dados);
+    //controllerNome.text = dados;
+    print("dadoss: " + dados.data.toString());
   }
 
     /*FirebaseUser userLog = await auth.getUser();

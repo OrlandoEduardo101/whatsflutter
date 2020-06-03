@@ -24,21 +24,6 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
     });
   }
 
-  final _$dadosAtom = Atom(name: '_ConfiguracoesControllerBase.dados');
-
-  @override
-  dynamic get dados {
-    _$dadosAtom.reportRead();
-    return super.dados;
-  }
-
-  @override
-  set dados(dynamic value) {
-    _$dadosAtom.reportWrite(value, super.dados, () {
-      super.dados = value;
-    });
-  }
-
   final _$controllerNomeAtom =
       Atom(name: '_ConfiguracoesControllerBase.controllerNome');
 
@@ -100,6 +85,21 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
     });
   }
 
+  final _$dadosAtom = Atom(name: '_ConfiguracoesControllerBase.dados');
+
+  @override
+  ObservableStream<UserModel> get dados {
+    _$dadosAtom.reportRead();
+    return super.dados;
+  }
+
+  @override
+  set dados(ObservableStream<UserModel> value) {
+    _$dadosAtom.reportWrite(value, super.dados, () {
+      super.dados = value;
+    });
+  }
+
   final _$recuperarIMGAsyncAction =
       AsyncAction('_ConfiguracoesControllerBase.recuperarIMG');
 
@@ -122,14 +122,6 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
   @override
   Future<dynamic> _recuperarURL(StorageTaskSnapshot snapshot) {
     return _$_recuperarURLAsyncAction.run(() => super._recuperarURL(snapshot));
-  }
-
-  final _$recuperarDadosAsyncAction =
-      AsyncAction('_ConfiguracoesControllerBase.recuperarDados');
-
-  @override
-  Future recuperarDados() {
-    return _$recuperarDadosAsyncAction.run(() => super.recuperarDados());
   }
 
   final _$_ConfiguracoesControllerBaseActionController =
@@ -169,14 +161,25 @@ mixin _$ConfiguracoesController on _ConfiguracoesControllerBase, Store {
   }
 
   @override
+  dynamic recuperarDados() {
+    final _$actionInfo = _$_ConfiguracoesControllerBaseActionController
+        .startAction(name: '_ConfiguracoesControllerBase.recuperarDados');
+    try {
+      return super.recuperarDados();
+    } finally {
+      _$_ConfiguracoesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 idLog: ${idLog},
-dados: ${dados},
 controllerNome: ${controllerNome},
 img: ${img},
 subindo: ${subindo},
-urlRec: ${urlRec}
+urlRec: ${urlRec},
+dados: ${dados}
     ''';
   }
 }

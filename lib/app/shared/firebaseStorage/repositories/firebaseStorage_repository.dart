@@ -11,15 +11,27 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   FirebaseStorage storage = FirebaseStorage.instance;
 
   @override
-  Future<Map<String, dynamic>> getUserData(String id) async {
+  Stream<UserModel> getUserData(String id) {
     print("firestore: "+firestore.toString()+id);
-    DocumentSnapshot snapshot = await firestore.collection('users').document(id).get();
-      print("userDatas: " +  snapshot.data.toString());
-      return snapshot.data;
+    return firestore.collection('users').document(id).snapshots().map((event){
+      print("userDatas: " +  event.data.toString());
+      return UserModel.fromDoc(event);
+    });
+
     }
 
   @override
-  Future<Map<String, dynamic>> setUserData(String id, Map<String, dynamic> Map) {
+  Future<Map<String, dynamic>> verifyUserData(String id) async {
+    print("firestore: "+firestore.toString()+id);
+    DocumentSnapshot snapshot = await firestore.collection('users').document(id).get();
+    print("userDatas: " +  snapshot.data.toString());
+    return snapshot.data;
+  }
+
+  @override
+  setUserData(String id, Map<String, dynamic> Map) {
+    print('nome'+Map['nome']);
+    print('uid3'+id);
     firestore.document(id)
         .setData(Map);
   }

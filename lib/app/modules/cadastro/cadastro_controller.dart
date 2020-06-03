@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
@@ -12,6 +13,7 @@ class CadastroController = _CadastroControllerBase with _$CadastroController;
 abstract class _CadastroControllerBase with Store {
   final IFirebaseStorageRepository repository;
   AuthController auth = Modular.get();
+  FirebaseUser  user;
 
   @observable
   String msgError = '';
@@ -53,7 +55,7 @@ abstract class _CadastroControllerBase with Store {
           usuario.password = senha;
           cadastrarUser(usuario);
 
-            msgError = "Sucesso";
+            //msgError = "Sucesso";
 
         }  else {
             return msgError = "Senha precisa ter pelo menos 6 caracteres";
@@ -68,24 +70,32 @@ abstract class _CadastroControllerBase with Store {
   }
 
   @action
-  cadastrarUser(UserModel usuario){
+  Future cadastrarUser(UserModel usuario) async {
 
-    auth.getCreateUser(usuario.email, usuario.password).then((firebaseUser){
-      repository.setUserData(firebaseUser.user.id, usuario.toMap());
+    user = await auth.getCreateUser(usuario.email, usuario.password).then((firebaseUser) {
+    print('uid:' + auth.user.uid);
+    setUserData(usuario, auth.user.uid);
 
     /*Firestore db = Firestore.instance;
     db.collection("users")
         .document(firebaseUser.user.uid)
         .setData(usuario.toMap());*/
 
-      Get.offAllNamed("/home");
-
-      msgError = "Sucesso";
+     // msgError = "Sucesso";
 
     }).catchError((error){
     print("Erro:" + error.toString());
     msgError = "Erro, verifique os campos!";
     });
+
     //Get.offAllNamed("/home");
   }
+
+  @action
+  Future setUserData(UserModel usuario, String id) {
+    print('uid2:' + auth.user.uid);
+    repository.setUserData(auth.user.uid, usuario.toMap());
+    Get.offAllNamed("/home");
+  }
+
 }

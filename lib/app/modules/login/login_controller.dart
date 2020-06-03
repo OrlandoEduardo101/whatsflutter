@@ -20,11 +20,9 @@ class LoginController = _LoginControllerBase with _$LoginController;
 abstract class _LoginControllerBase with Store {
 
   AuthController auth = Modular.get();
-  Future<FirebaseUser> userCurrent;
+  //Future<FirebaseUser> userCurrent;
   final IFirebaseStorageRepository repository;
   UserModel user = UserModel();
-
-  UserModel userLogged = UserModel();
 
   ExceptionStore exceptionStore = ExceptionStore();
   TextErrorController textErrorController = TextErrorController();
@@ -38,7 +36,7 @@ abstract class _LoginControllerBase with Store {
   @observable
   String email = '';
 
-  _LoginControllerBase(this.repository);
+  _LoginControllerBase(IFirebaseStorageRepository this.repository);
 
   @action
   setEmail(String value) => email = value;
@@ -53,9 +51,9 @@ abstract class _LoginControllerBase with Store {
   Future loginWithEmail() async {
       textErrorController.setColor(verdeRecode);
       exceptionStore.setError('Carregando...');
-      FirebaseUser user = await auth.loginWithEmail(email, password).then((_) {
+      FirebaseUser user = await auth.loginWithEmail(email, password).then((_) async {
       load = true;
-      verifyUserData(auth.user.uid);
+      await verifyUserData(auth.user.uid);
     } ).catchError((e){
       load = false;
       textErrorController.setColor(Colors.red);
@@ -80,10 +78,12 @@ abstract class _LoginControllerBase with Store {
 
   @action
    Future verifyUserData(String uid) async {
-
-        data = await repository.getUserData(uid);
+    UserModel userLogged = UserModel();
+        data =  await repository.verifyUserData(uid);
+        //userLogged = data.data;
         if(data == null){
           print("uid:  "+uid);
+          //print("uid logged:  "+userLogged.uid);
           toCadastro();
         } else{
           print("data: "+data.toString());

@@ -92,6 +92,14 @@ mixin _$CadastroController on _CadastroControllerBase, Store {
     return _$validarCamposAsyncAction.run(() => super.validarCampos());
   }
 
+  final _$cadastrarUserAsyncAction =
+      AsyncAction('_CadastroControllerBase.cadastrarUser');
+
+  @override
+  Future<dynamic> cadastrarUser(UserModel usuario) {
+    return _$cadastrarUserAsyncAction.run(() => super.cadastrarUser(usuario));
+  }
+
   final _$_CadastroControllerBaseActionController =
       ActionController(name: '_CadastroControllerBase');
 
@@ -129,11 +137,11 @@ mixin _$CadastroController on _CadastroControllerBase, Store {
   }
 
   @override
-  dynamic cadastrarUser(UserModel usuario) {
+  Future<dynamic> setUserData(UserModel usuario, String id) {
     final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
-        name: '_CadastroControllerBase.cadastrarUser');
+        name: '_CadastroControllerBase.setUserData');
     try {
-      return super.cadastrarUser(usuario);
+      return super.setUserData(usuario, id);
     } finally {
       _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
     }

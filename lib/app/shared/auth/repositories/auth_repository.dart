@@ -55,14 +55,19 @@ class AuthRepository implements IAuthRepository{
 
   @override
   Future<FirebaseUser> getCreateUser(String email, String password) async {
-    await _auth.createUserWithEmailAndPassword(
+    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password
-    ).then((user){
+    )).user;
+    return user;
+
+    /*then((user){
+      print("Sucess cadastro");
       return user;
     }).catchError((error){
+      print("erro cadastro" + error.toString());
       return error;
-    });
+    });*/
   }
 
 }
