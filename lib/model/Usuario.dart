@@ -3,6 +3,7 @@ class user{
   String _nome;
   String _email;
   String _senha;
+  String _urlIMG;
 
   user();
 
@@ -12,6 +13,13 @@ class user{
       "email" : this.email
     };
     return map;
+  }
+
+
+  String get urlIMG => _urlIMG;
+
+  set urlIMG(String value) {
+    _urlIMG = value;
   }
 
   String get senha => _senha;
