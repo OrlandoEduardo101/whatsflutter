@@ -12,6 +12,13 @@ class Mensagens extends StatefulWidget {
 
 class _MensagensState extends State<Mensagens> {
 
+  List<String> listaMsg = [
+    "Fala Zeze",
+    "Bomdia cara",
+    "deixa eu te falar",
+    "adianta os 60%"
+  ];
+  
   TextEditingController _controllerMsg = TextEditingController();
 
   _enviarMsg(){
@@ -56,6 +63,37 @@ class _MensagensState extends State<Mensagens> {
         ],
       ),
     );
+    var listview = Expanded(
+        child: ListView.builder(
+            itemCount: listaMsg.length,
+            itemBuilder: (context, index){
+              double largura = MediaQuery.of(context).size.width*0.8;
+              Alignment alinhamento = Alignment.centerRight;
+              Color cor = Color(0xffd2ffa5);
+              if(index%2 == 0){
+                  cor = Colors.white;
+                  alinhamento = Alignment.bottomLeft;
+              }
+              return Align(
+                alignment: alinhamento,
+                child: Padding(
+                    padding: EdgeInsets.all(6),
+                  child: Container(
+                    width: largura,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: cor,
+                      borderRadius: BorderRadius.all(Radius.circular(8))
+                    ),
+                    child: Text(listaMsg[index],
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ),
+              );
+            }
+        ),
+    );
     return Scaffold(
       appBar: AppBar(title: Text(widget.contato.nome),),
       body: Container(
@@ -68,7 +106,7 @@ class _MensagensState extends State<Mensagens> {
               padding: EdgeInsets.all(8),
               child: Column(
                 children: [
-                  Text('listview'),
+                  listview,
                   caixaMsg
                 ],
               ),
