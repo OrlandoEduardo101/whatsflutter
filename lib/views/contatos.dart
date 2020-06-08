@@ -29,6 +29,7 @@ class _ContatosState extends State<Contatos> {
     for (DocumentSnapshot item in query.documents) {
       var dados = item.data;
       user usuario = user();
+      usuario.idUser = item.documentID;
       usuario.email = dados["email"];
       usuario.nome = dados["nome"];
       usuario.urlIMG = dados["urlIMG"];

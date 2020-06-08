@@ -4,6 +4,8 @@ class user{
   String _email;
   String _senha;
   String _urlIMG;
+  String _idUser;
+ 
 
   user();
 
@@ -15,7 +17,10 @@ class user{
     return map;
   }
 
+  String get idUser => _idUser;
 
+  set idUser(String value) => _idUser = value;
+  
   String get urlIMG => _urlIMG;
 
   set urlIMG(String value) {

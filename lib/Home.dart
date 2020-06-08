@@ -15,13 +15,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
   TabController _tabController;
   List<String> itensMenu = ["Configurações","Deslogar"];
 
+  Future _verificar() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseUser userLog = await auth.currentUser();
+    if (userLog == null) {
+      Get.offAllNamed("/login");
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    _verificar();
     _tabController = TabController(length: 2, vsync: this);
-
   }
 
   _escolhaMenuItem(String itemEscolhido){

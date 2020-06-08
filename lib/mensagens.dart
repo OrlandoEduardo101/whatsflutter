@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsflutter/model/Mensagem.dart';
 import 'package:whatsflutter/res.dart';
 
 import 'model/Usuario.dart';
@@ -12,6 +15,9 @@ class Mensagens extends StatefulWidget {
 
 class _MensagensState extends State<Mensagens> {
 
+  String _idLog;
+  String _idDest;
+
   List<String> listaMsg = [
     "Fala Zeze",
     "Bomdia cara",
@@ -23,9 +29,42 @@ class _MensagensState extends State<Mensagens> {
 
   _enviarMsg(){
 
+    String msg = _controllerMsg.text;
+    if (msg.isNotEmpty) {
+      
+      Mensagem msgm = Mensagem();
+      msgm.idUser = _idLog;
+      msgm.msg = msg;
+      msgm.urlIMG = "";
+      msgm.tipo = "text";
+      _salvarMsg(_idLog, _idDest, msgm);
+    } else {
+    }
+
   }
   _enviarFoto(){
 
+  }
+
+  _salvarMsg(String idRemet, String idDest, Mensagem msg){
+    Firestore db = Firestore.instance;
+    db.collection("menssagens").document(idRemet).collection(idDest).add(msg.toMap());
+    _controllerMsg.clear();
+  }
+
+  _recuperarDados()async{
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseUser userLog = await auth.currentUser();
+    _idLog = userLog.uid;
+    _idDest = widget.contato.idUser;
+    
+  }
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _recuperarDados();
   }
 
   @override
@@ -95,7 +134,18 @@ class _MensagensState extends State<Mensagens> {
         ),
     );
     return Scaffold(
-      appBar: AppBar(title: Text(widget.contato.nome),),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            CircleAvatar(
+              maxRadius: 20,
+                backgroundColor: Colors.grey,
+                backgroundImage: widget.contato.urlIMG != null ? NetworkImage(widget.contato.urlIMG) : null,
+            ),
+            Padding(padding: EdgeInsets.only(left:8), child: Text(widget.contato.nome),),
+          ],
+        ),
+        ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
