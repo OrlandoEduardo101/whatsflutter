@@ -36,6 +36,7 @@ class _MensagensState extends State<Mensagens> {
       msgm.urlIMG = "";
       msgm.tipo = "text";
       _salvarMsg(_idLog, _idDest, msgm);
+      _salvarMsg(_idDest, _idLog, msgm);
     } else {}
   }
 
