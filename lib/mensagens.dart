@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:whatsflutter/model/Mensagem.dart';
 import 'package:whatsflutter/res.dart';
-
+import 'dart:io';
 import 'model/Usuario.dart';
 
 class Mensagens extends StatefulWidget {
@@ -17,6 +19,8 @@ class _MensagensState extends State<Mensagens> {
   String _idLog;
   String _idDest;
   Firestore db = Firestore.instance;
+  File _img;
+  bool _subindo = false;
 
   List<String> listaMsg = [
     "Fala Zeze",
@@ -40,7 +44,46 @@ class _MensagensState extends State<Mensagens> {
     } else {}
   }
 
-  _enviarFoto() {}
+  _enviarFoto() async {
+    String nome = DateTime.now().millisecondsSinceEpoch.toString();
+    File _img;
+    _img = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    FirebaseStorage storage = FirebaseStorage.instance;
+    StorageReference raiz = storage.ref();
+    StorageReference arq = raiz.child("mensagens").child(_idLog).child(nome+".jpg");
+    //upload img
+    StorageUploadTask task = arq.putFile(_img);
+    //controle progresso
+    task.events.listen((StorageTaskEvent event) {
+      if (event.type == StorageTaskEventType.progress) {
+        setState(() {
+          _subindo = true;
+        });
+      }  else if(event.type == StorageTaskEventType.success){
+        setState(() {
+          _subindo = false;
+        });
+      }
+    });
+    //recuperar url da img
+    task.onComplete.then((StorageTaskSnapshot value){
+      _recuperarURL(value);
+    });
+
+  }
+
+  Future _recuperarURL(StorageTaskSnapshot snapshot) async{
+    String url = await snapshot.ref.getDownloadURL();
+    Mensagem msgm = Mensagem();
+    msgm.idUser = _idLog;
+    msgm.msg = "";
+    msgm.urlIMG = url;
+    msgm.tipo = "img";
+
+    _salvarMsg(_idLog, _idDest, msgm);
+    _salvarMsg(_idDest, _idLog, msgm);
+  }
 
   _salvarMsg(String idRemet, String idDest, Mensagem msg) async {
     await db
@@ -86,7 +129,7 @@ class _MensagensState extends State<Mensagens> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(32),
                     ),
-                    prefixIcon: IconButton(
+                    prefixIcon: _subindo ? CircularProgressIndicator() : IconButton(
                         icon: Icon(Icons.camera_alt), onPressed: _enviarFoto)),
                 controller: _controllerMsg,
               ),
@@ -155,10 +198,7 @@ class _MensagensState extends State<Mensagens> {
                                   color: cor,
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(8))),
-                              child: Text(
-                                item['msg'],
-                                style: TextStyle(fontSize: 18),
-                              ),
+                              child: item['tipo'] == "text" ? Text(item['msg'], style: TextStyle(fontSize: 18)) : Image.network(item['urlIMG']),
                             ),
                           ),
                         );
