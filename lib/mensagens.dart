@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:whatsflutter/model/Conversa.dart';
 import 'package:whatsflutter/model/Mensagem.dart';
 import 'package:whatsflutter/res.dart';
 import 'dart:io';
@@ -41,6 +42,7 @@ class _MensagensState extends State<Mensagens> {
       msgm.tipo = "text";
       _salvarMsg(_idLog, _idDest, msgm);
       _salvarMsg(_idDest, _idLog, msgm);
+      _salvarConversa(msgm);
     } else {}
   }
 
@@ -83,6 +85,26 @@ class _MensagensState extends State<Mensagens> {
 
     _salvarMsg(_idLog, _idDest, msgm);
     _salvarMsg(_idDest, _idLog, msgm);
+  }
+
+  _salvarConversa(Mensagem msg){
+    Conversa cRemet = Conversa();
+    cRemet.idRemet = _idLog;
+    cRemet.idDest = _idDest;
+    cRemet.mensagem = msg.msg;
+    cRemet.nome = widget.contato.nome;
+    cRemet.URLfoto = widget.contato.urlIMG;
+    cRemet.tipo = msg.tipo;
+    cRemet.Salvar();
+
+    Conversa cDest = Conversa();
+    cDest.idRemet = _idDest;
+    cDest.idDest = _idLog;
+    cDest.mensagem = msg.msg;
+    cDest.nome = widget.contato.nome;
+    cDest.URLfoto = widget.contato.urlIMG;
+    cDest.tipo = msg.tipo;
+    cDest.Salvar();
   }
 
   _salvarMsg(String idRemet, String idDest, Mensagem msg) async {
@@ -151,7 +173,7 @@ class _MensagensState extends State<Mensagens> {
         stream: db
             .collection("menssagens")
             .document(_idLog)
-            .collection(_idDest)
+            .collection(_idDest).orderBy("time")
             .snapshots(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {

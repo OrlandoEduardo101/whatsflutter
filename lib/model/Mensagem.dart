@@ -3,6 +3,8 @@ class  Mensagem{
   String _msg;
   String _urlIMG;
   String _tipo;
+  String _time = DateTime.now().millisecondsSinceEpoch.toString();
+
   Mensagem();
 
    Map<String, dynamic> toMap(){
@@ -10,7 +12,8 @@ class  Mensagem{
       "idUser" : this.idUser,
       "msg" : this.msg,
       "urlIMG" : this.urlIMG,
-      "tipo" : this.tipo
+      "tipo" : this.tipo,
+      "time" : this._time
     };
     return map;
   }

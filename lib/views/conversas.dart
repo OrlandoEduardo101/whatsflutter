@@ -9,14 +9,15 @@ class Conversas extends StatefulWidget {
 
 class _ConversasState extends State<Conversas> {
 
-  List<Conversa> listaConversa = [
-    Conversa("Thiago Neves", "Fala zeze, bom dia cara", Res.nevesURL),
-    Conversa("Richarlison Pombo", "PRUUUUU", Res.pomboURL),
-    Conversa("Fabuloso", "Prefiro ajudar na briga!", Res.fabulosoURL),
-    Conversa("Marinho", "que merda hein?! sabia não", Res.marinhoURL),
-    Conversa("Mr. Jesus", "Ôto patamá", Res.jesusURL),
+  List<Conversa> listaConversa = [] ;
 
-  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //Conversa cRemet = Conversa();
+    listaConversa.add(Conversa("Thiago Neves", "Fala zeze, bom dia cara", Res.nevesURL));
+  }
 
   @override
   Widget build(BuildContext context) {
