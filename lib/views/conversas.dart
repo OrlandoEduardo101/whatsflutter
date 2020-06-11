@@ -15,7 +15,7 @@ class Conversas extends StatefulWidget {
 
 class _ConversasState extends State<Conversas> {
 
-  List<Conversa> listaConversa = [] ;
+  List<Conversa> _listaConversa = List() ;
   final _controller = StreamController<QuerySnapshot>.broadcast();
   Firestore db = Firestore.instance;
   String _idLog;
@@ -33,9 +33,9 @@ class _ConversasState extends State<Conversas> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //Conversa cRemet = Conversa();
-    listaConversa.add(Conversa("Thiago Neves", "Fala zeze, bom dia cara", Res.nevesURL));
     _recuperarDados();
+    //Conversa cRemet = Conversa();
+    _listaConversa.add(Conversa("Thiago Neves", "Fala zeze, bom dia cara", Res.nevesURL));
   }
 
   Stream<QuerySnapshot> _ListenerConversas(){
@@ -58,7 +58,6 @@ class _ConversasState extends State<Conversas> {
         stream: _controller.stream,
         // ignore: missing_return
         builder: (context, snapshot){
-
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
@@ -87,7 +86,7 @@ class _ConversasState extends State<Conversas> {
                 }else{
                   return Container(
                     child: ListView.builder(
-                        itemCount: listaConversa.length,
+                        itemCount: _listaConversa.length,
                         itemBuilder: (context, index){
                           //Conversa conversa = listaConversa[index];
                           List<DocumentSnapshot> convs = query.documents.toList();
@@ -120,7 +119,6 @@ class _ConversasState extends State<Conversas> {
                               ),
                             ),
                           );
-
                         }
                     ),
                   );
@@ -130,6 +128,5 @@ class _ConversasState extends State<Conversas> {
           }
         }
     );
-
   }
 }

@@ -25,6 +25,7 @@ class _MensagensState extends State<Mensagens> {
   Firestore db = Firestore.instance;
   File _img;
   bool _subindo = false;
+  user _logado = user();
 
   List<String> listaMsg = [
     "Fala Zeze",
@@ -50,7 +51,7 @@ class _MensagensState extends State<Mensagens> {
       _salvarMsg(_idLog, _idDest, msgm);
       _salvarMsg(_idDest, _idLog, msgm);
       _salvarConversa(msgm);
-    } else {}
+    }
   }
 
   _enviarFoto() async {
@@ -93,6 +94,7 @@ class _MensagensState extends State<Mensagens> {
 
     _salvarMsg(_idLog, _idDest, msgm);
     _salvarMsg(_idDest, _idLog, msgm);
+    _salvarConversa(msgm);
   }
 
   _salvarConversa(Mensagem msg){
@@ -111,8 +113,8 @@ class _MensagensState extends State<Mensagens> {
     cDest.idRemet = _idDest;
     cDest.idDest = _idLog;
     cDest.mensagem = msg.msg;
-    cDest.nome = widget.contato.nome;
-    cDest.URLfoto = widget.contato.urlIMG;
+    cDest.nome = _logado.nome;
+    cDest.URLfoto = _logado.urlIMG;
     cDest.tipo = msg.tipo;
     cDest.data = Timestamp.now().toString();
     cDest.Salvar();
@@ -133,7 +135,20 @@ class _MensagensState extends State<Mensagens> {
     FirebaseUser userLog = await auth.currentUser();
     _idLog = userLog.uid;
     _idDest = widget.contato.idUser;
+
+
+    Firestore db = Firestore.instance;
+    DocumentSnapshot snapshot = await db.collection("users").document(_idLog).get();
+    Map<String, dynamic> dados = snapshot.data;
+    _logado.nome = dados["nome"];
+
+    if (dados["urlIMG"] != null) {
+      //_urlRec = dados["urlIMG"];
+      _logado.urlIMG = dados["urlIMG"];
+    }
+
     _ListenerMsgs();
+
   }
 
   Stream<QuerySnapshot> _ListenerMsgs(){

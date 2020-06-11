@@ -17,6 +17,14 @@ class user{
     return map;
   }
 
+  Map<String, dynamic> fromStream(var value){
+    Map<String, dynamic> map = {
+      this.nome : value["nome"],
+      this.urlIMG : value["urlIMG"]
+    };
+    return map;
+  }
+
   String get idUser => _idUser;
 
   set idUser(String value) => _idUser = value;
