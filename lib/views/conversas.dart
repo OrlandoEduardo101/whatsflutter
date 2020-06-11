@@ -39,7 +39,7 @@ class _ConversasState extends State<Conversas> {
   }
 
   Stream<QuerySnapshot> _ListenerConversas(){
-    final stream = db.collection("conversas").document(_idLog).collection("ultima").snapshots();
+    final stream = db.collection("conversas").document(_idLog).collection("ultima").orderBy("data").snapshots();
     stream.listen((event) {
       _controller.add(event);
     });

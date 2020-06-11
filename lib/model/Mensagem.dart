@@ -4,6 +4,13 @@ class  Mensagem{
   String _urlIMG;
   String _tipo;
   String _time = DateTime.now().millisecondsSinceEpoch.toString();
+  String _data;
+
+  String get data => _data;
+
+  set data(String value) {
+    _data = value;
+  }
 
   Mensagem();
 
@@ -13,7 +20,8 @@ class  Mensagem{
       "msg" : this.msg,
       "urlIMG" : this.urlIMG,
       "tipo" : this.tipo,
-      "time" : this._time
+      "time" : this._time,
+      "data" : this.data
     };
     return map;
   }

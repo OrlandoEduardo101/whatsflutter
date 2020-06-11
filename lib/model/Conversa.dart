@@ -7,6 +7,7 @@ class Conversa{
   String _idRemet;
   String _idDest;
   String _tipo;
+  String _data;
 
   Conversa([this._nome, this._mensagem, this._URLfoto]);
 
@@ -23,8 +24,15 @@ class Conversa{
       "mensagem" : this.mensagem,
       "URLfoto" : this.URLfoto,
       "tipo" : this.tipo,
+      "data" : this.data,
     };
     return map;
+  }
+
+  String get data => _data;
+
+  set data(String value) {
+    _data = value;
   }
 
   String get nome => _nome;

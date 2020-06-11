@@ -45,6 +45,7 @@ class _MensagensState extends State<Mensagens> {
       msgm.idUser = _idLog;
       msgm.msg = msg;
       msgm.urlIMG = "";
+      msgm.data = Timestamp.now().toString();
       msgm.tipo = "text";
       _salvarMsg(_idLog, _idDest, msgm);
       _salvarMsg(_idDest, _idLog, msgm);
@@ -87,6 +88,7 @@ class _MensagensState extends State<Mensagens> {
     msgm.idUser = _idLog;
     msgm.msg = "";
     msgm.urlIMG = url;
+    msgm.data = Timestamp.now().toString();
     msgm.tipo = "img";
 
     _salvarMsg(_idLog, _idDest, msgm);
@@ -102,6 +104,7 @@ class _MensagensState extends State<Mensagens> {
     cRemet.nome = widget.contato.nome;
     cRemet.URLfoto = widget.contato.urlIMG;
     cRemet.tipo = msg.tipo;
+    cRemet.data = Timestamp.now().toString();
     cRemet.Salvar();
 
     Conversa cDest = Conversa();
@@ -111,6 +114,7 @@ class _MensagensState extends State<Mensagens> {
     cDest.nome = widget.contato.nome;
     cDest.URLfoto = widget.contato.urlIMG;
     cDest.tipo = msg.tipo;
+    cDest.data = Timestamp.now().toString();
     cDest.Salvar();
 
   }
@@ -136,7 +140,7 @@ class _MensagensState extends State<Mensagens> {
     final stream = db
         .collection("menssagens")
         .document(_idLog)
-        .collection(_idDest).orderBy("time")
+        .collection(_idDest).orderBy("data")
         .snapshots();
     stream.listen((event) {
       _controller.add(event);
