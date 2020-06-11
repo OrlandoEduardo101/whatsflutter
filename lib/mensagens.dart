@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -32,6 +34,9 @@ class _MensagensState extends State<Mensagens> {
   ];
 
   TextEditingController _controllerMsg = TextEditingController();
+  final _controller = StreamController<QuerySnapshot>.broadcast();
+  ScrollController _scrollController = ScrollController();
+
 
   _enviarMsg() {
     String msg = _controllerMsg.text;
@@ -124,6 +129,22 @@ class _MensagensState extends State<Mensagens> {
     FirebaseUser userLog = await auth.currentUser();
     _idLog = userLog.uid;
     _idDest = widget.contato.idUser;
+    _ListenerMsgs();
+  }
+
+  Stream<QuerySnapshot> _ListenerMsgs(){
+    final stream = db
+        .collection("menssagens")
+        .document(_idLog)
+        .collection(_idDest).orderBy("time")
+        .snapshots();
+    stream.listen((event) {
+      _controller.add(event);
+      Timer(
+          Duration(seconds: 1), (){
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      } );
+    });
   }
 
   @override
@@ -176,11 +197,7 @@ class _MensagensState extends State<Mensagens> {
     );
 
     var stream = StreamBuilder(
-        stream: db
-            .collection("menssagens")
-            .document(_idLog)
-            .collection(_idDest).orderBy("time")
-            .snapshots(),
+        stream: _controller.stream,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -204,6 +221,7 @@ class _MensagensState extends State<Mensagens> {
               } else {
                 return Expanded(
                   child: ListView.builder(
+                    controller: _scrollController,
                       itemCount: query.documents.length,
                       itemBuilder: (context, index) {
                         List<DocumentSnapshot> msgs = query.documents.toList();
