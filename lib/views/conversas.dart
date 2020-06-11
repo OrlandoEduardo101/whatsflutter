@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:whatsflutter/model/Conversa.dart';
+import 'package:whatsflutter/model/Usuario.dart';
 import 'package:whatsflutter/res.dart';
 
 class Conversas extends StatefulWidget {
@@ -44,9 +46,17 @@ class _ConversasState extends State<Conversas> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.close();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
         stream: _controller.stream,
+        // ignore: missing_return
         builder: (context, snapshot){
 
           switch (snapshot.connectionState) {
@@ -82,7 +92,12 @@ class _ConversasState extends State<Conversas> {
                           //Conversa conversa = listaConversa[index];
                           List<DocumentSnapshot> convs = query.documents.toList();
                           DocumentSnapshot item = convs[index];
+                          user usuario = user();
+                          usuario.nome = item['nome'];
+                          usuario.urlIMG = item['URLfoto'];
+                          usuario.idUser = item['idDest'];
                           return ListTile(
+                            onTap:(){ Get.toNamed('/mensagens', arguments: usuario);},
                             contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                             leading: CircleAvatar(
                               maxRadius: 30,

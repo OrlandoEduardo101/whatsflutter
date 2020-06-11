@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsflutter/model/Conversa.dart';
@@ -88,6 +89,7 @@ class _MensagensState extends State<Mensagens> {
   }
 
   _salvarConversa(Mensagem msg){
+
     Conversa cRemet = Conversa();
     cRemet.idRemet = _idLog;
     cRemet.idDest = _idDest;
@@ -105,6 +107,7 @@ class _MensagensState extends State<Mensagens> {
     cDest.URLfoto = widget.contato.urlIMG;
     cDest.tipo = msg.tipo;
     cDest.Salvar();
+
   }
 
   _salvarMsg(String idRemet, String idDest, Mensagem msg) async {
@@ -157,6 +160,9 @@ class _MensagensState extends State<Mensagens> {
               ),
             ),
           ),
+          Platform.isIOS ? CupertinoButton(
+              child: Text("enviar"),
+              onPressed: _enviarMsg) :
           FloatingActionButton(
               backgroundColor: Color(0xff075E54),
               child: Icon(
@@ -257,11 +263,11 @@ class _MensagensState extends State<Mensagens> {
                 image: AssetImage(Res.perfil2), fit: BoxFit.cover)),
         child: SafeArea(
             child: Container(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            children: [stream, caixaMsg],
-          ),
-        )),
+              padding: EdgeInsets.all(8),
+              child: Column(
+                children: [stream, caixaMsg],
+              ),
+            )),
       ),
     );
   }
