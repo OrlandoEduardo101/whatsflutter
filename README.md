@@ -14,6 +14,16 @@ Tecnologias utilizadas:
 -Firebase
 -Slidy
 
+#Screenshots
+
+![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.00.682.png?raw=true)
+![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.28.423.png?raw=true)
+![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.35.046.png?raw=true)
+![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.44.962.png?raw=true)
+![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.21.34.512.png?raw=true)
+![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.22.08.959.png?raw=true)
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
