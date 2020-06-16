@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:whatsflutter/app/modules/home/components/conversas/model/conversas_model.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 
 abstract class IFirebaseStorageRepository{
@@ -9,6 +10,7 @@ abstract class IFirebaseStorageRepository{
       updateURL(String url, Map<String, dynamic> dadosAtt);
       updateName(String nome, Map<String, dynamic> dadosAtt);
       updateData(String nome, Map<String, dynamic> dadosAtt);
+      Stream<List<UserModel>> recuperarContatos();
       Future<Map<String, dynamic>> verifyUserData(String id);
 
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:whatsflutter/app/modules/home/components/contatos/contatos_controller.dart';
 import 'components/contatos/contatos_widget.dart';
 import 'components/conversas/conversas_widget.dart';
 import 'home_controller.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
     super.initState();
 
     _tabController = TabController(length: 2, vsync: this);
-
+    //ContatosController().recuperarContatos();
   }
 
   @override

@@ -1,26 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ConversasModel {
-  ConversasModel(this._nome, this._mensagem, this._URLfoto);
+  ConversasModel({this.nome='', this.mensagem='', this.URLfoto='', this.reference});
 
-  String _nome;
-  String _mensagem;
-  String _URLfoto;
+  String nome;
+  String mensagem;
+  String URLfoto;
+  DocumentReference reference;
 
-  String get nome => _nome;
-
-  set nome(String value) {
-    _nome = value;
-  }
-
-  String get mensagem => _mensagem;
-
-  String get URLfoto => _URLfoto;
-
-  set URLfoto(String value) {
-    _URLfoto = value;
-  }
-
-  set mensagem(String value) {
-    _mensagem = value;
+  factory ConversasModel.fromDoc(DocumentSnapshot doc) {
+    return ConversasModel(
+      nome: doc['nome'],
+      //nick : doc['nick'],
+      mensagem: doc['email'],
+      URLfoto: doc['urlIMG'],
+      // uid : doc['uid'],
+      // present : doc['present'],
+      // isAdm : doc['isAdm'],
+      reference: doc.reference,
+    );
   }
 
   /*factory ConversasModel.fromJson(Map<String, dynamic> json) {

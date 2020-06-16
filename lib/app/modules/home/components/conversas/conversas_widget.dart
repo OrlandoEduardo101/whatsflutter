@@ -6,11 +6,11 @@ import 'model/conversas_model.dart';
 class ConversasWidget extends StatelessWidget {
 
   List<ConversasModel> listaConversa = [
-    ConversasModel("Thiago Neves", "Fala zeze, bom dia cara", Res.nevesURL),
-    ConversasModel("Richarlison Pombo", "PRUUUUU", Res.pomboURL),
-    ConversasModel("Fabuloso", "Prefiro ajudar na briga!", Res.fabulosoURL),
-    ConversasModel("Marinho", "que merda hein?! sabia não", Res.marinhoURL),
-    ConversasModel("Mr. Jesus", "Ôto patamá", Res.jesusURL),
+    ConversasModel(nome: "Thiago Neves", mensagem: "Fala zeze, bom dia cara", URLfoto: Res.nevesURL),
+    //ConversasModel("Richarlison Pombo", "PRUUUUU", Res.pomboURL),
+    //ConversasModel("Fabuloso", "Prefiro ajudar na briga!", Res.fabulosoURL),
+    //ConversasModel("Marinho", "que merda hein?! sabia não", Res.marinhoURL),
+    //ConversasModel("Mr. Jesus", "Ôto patamá", Res.jesusURL),
   ];
 
   @override

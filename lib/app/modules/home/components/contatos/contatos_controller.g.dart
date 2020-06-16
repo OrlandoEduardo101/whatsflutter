@@ -9,18 +9,19 @@ part of 'contatos_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ContatosController on _ContatosControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ContatosControllerBase.value');
+  final _$listaConversaAtom =
+      Atom(name: '_ContatosControllerBase.listaConversa');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ObservableStream<List<UserModel>> get listaConversa {
+    _$listaConversaAtom.reportRead();
+    return super.listaConversa;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set listaConversa(ObservableStream<List<UserModel>> value) {
+    _$listaConversaAtom.reportWrite(value, super.listaConversa, () {
+      super.listaConversa = value;
     });
   }
 
@@ -28,11 +29,11 @@ mixin _$ContatosController on _ContatosControllerBase, Store {
       ActionController(name: '_ContatosControllerBase');
 
   @override
-  void increment() {
+  Stream<List<UserModel>> recuperarContatos() {
     final _$actionInfo = _$_ContatosControllerBaseActionController.startAction(
-        name: '_ContatosControllerBase.increment');
+        name: '_ContatosControllerBase.recuperarContatos');
     try {
-      return super.increment();
+      return super.recuperarContatos();
     } finally {
       _$_ContatosControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +42,7 @@ mixin _$ContatosController on _ContatosControllerBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+listaConversa: ${listaConversa}
     ''';
   }
 }
