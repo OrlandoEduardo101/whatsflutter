@@ -6,6 +6,9 @@ import 'package:whatsflutter/app/modules/cadastroDados/cadastroDados_module.dart
 import 'package:whatsflutter/app/modules/configuracoes/configuracoes_controller.dart';
 import 'package:whatsflutter/app/modules/configuracoes/configuracoes_module.dart';
 import 'package:whatsflutter/app/modules/login/login_controller.dart';
+import 'package:whatsflutter/app/modules/login/model/user_model.dart';
+import 'package:whatsflutter/app/modules/mensagens/mensagens_module.dart';
+import 'package:whatsflutter/app/modules/mensagens/mensagens_page.dart';
 import 'package:whatsflutter/app/shared/auth/auth_controller.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository.dart';
 import 'package:whatsflutter/app/shared/auth/repositories/auth_repository_interface.dart';
@@ -18,6 +21,7 @@ import 'modules/cadastro/cadastro_controller.dart';
 import 'modules/cadastro/cadastro_module.dart';
 import 'modules/home/home_module.dart';
 import 'modules/login/login_module.dart';
+import 'modules/mensagens/mensagens_controller.dart';
 
 class AppModule extends MainModule {
   @override
@@ -30,6 +34,7 @@ class AppModule extends MainModule {
     Bind((i) => ConfiguracoesController(i.get())),
     //Bind((i) => CadastroController(i.get())),
     Bind<IAuthRepository>((i) => AuthRepository()),
+    Bind((i) => MensagensController()),
     Bind<IFirebaseStorageRepository>((i) => FirebaseStorageRepository(Firestore.instance)),
   ];
 
@@ -41,6 +46,8 @@ class AppModule extends MainModule {
     Router('/cadastro', module: CadastroModule()),
     Router('/cadastroDados', module: CadastroDadosModule()),
     Router('/conf', module: ConfiguracoesModule()),
+    //Router('/mensagens', module: MensagensModule()),
+    Router('/mensagens', child: (_, args) => MensagensPage(model: args.data)),
   ];
 
 

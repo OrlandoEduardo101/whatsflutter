@@ -68,25 +68,13 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
             (e) => UserModel.fromDoc(e)).toList()
     );
 
-      /*QuerySnapshot query = await firestore.collection('users').getDocuments();
-    List<UserModel> listaUser = [];
-
-    for (DocumentSnapshot item in query.documents) {
-      var dados = item.data;
-      UserModel usuario = UserModel();
-      usuario.uid = item.documentID;
-      usuario.email = dados["email"];
-      usuario.nome = dados["nome"];
-      usuario.urlIMG = dados["urlIMG"];
-      print('Nome: '+usuario.nome);
-      listaUser.add(usuario);
-    }
-
-    print('Lista: '+ listaUser[1].nome);
-    return listaUser;*/
-
-
   }
+
+  @override
+  salvarMensagem(String idRemet, String idDest, Map<String, dynamic> msg) async{
+  await firestore.collection(("mensagens")).document(idRemet).collection(idDest).add(msg);
+  }
+
 
 
 

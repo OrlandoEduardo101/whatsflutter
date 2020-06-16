@@ -12,5 +12,6 @@ abstract class IFirebaseStorageRepository{
       updateData(String nome, Map<String, dynamic> dadosAtt);
       Stream<List<UserModel>> recuperarContatos();
       Future<Map<String, dynamic>> verifyUserData(String id);
+      salvarMensagem(String idRemet, String idDest, Map<String, dynamic> msg);
 
 }

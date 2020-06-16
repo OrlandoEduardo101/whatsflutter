@@ -75,7 +75,7 @@ class _ContatosWidget extends State<ContatosWidget> {
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   onTap: () {
-                    Get.toNamed('/mensagens', arguments: usuari);
+                    Modular.to.pushNamed('/mensagens', arguments: usuari);
                   },
                 );
               });
