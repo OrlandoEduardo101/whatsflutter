@@ -84,7 +84,7 @@ abstract class _LoginControllerBase with Store {
         if(data == null){
           print("uid:  "+uid);
           //print("uid logged:  "+userLogged.uid);
-          toCadastro();
+          Get.offAllNamed('/cadastroDados');
         } else{
           print("data: "+data.toString());
           Get.offAllNamed('/home');

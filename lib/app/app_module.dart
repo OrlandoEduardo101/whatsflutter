@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/app_controller.dart';
+import 'package:whatsflutter/app/modules/cadastroDados/cadastroDados_module.dart';
 import 'package:whatsflutter/app/modules/configuracoes/configuracoes_controller.dart';
 import 'package:whatsflutter/app/modules/configuracoes/configuracoes_module.dart';
 import 'package:whatsflutter/app/modules/login/login_controller.dart';
@@ -38,6 +39,7 @@ class AppModule extends MainModule {
     Router('/login', module: LoginModule()),
     Router('/home', module: HomeModule()),
     Router('/cadastro', module: CadastroModule()),
+    Router('/cadastroDados', module: CadastroDadosModule()),
     Router('/conf', module: ConfiguracoesModule()),
   ];
 
