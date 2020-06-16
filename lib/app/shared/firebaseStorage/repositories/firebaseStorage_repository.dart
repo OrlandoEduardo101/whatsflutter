@@ -64,7 +64,7 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   @override
   Stream<List<UserModel>> recuperarContatos() {
 
-    return firestore.collection('users').snapshots().map((event) => event.documents.map(
+    return firestore.collection('users').orderBy('nome').snapshots().map((event) => event.documents.map(
             (e) => UserModel.fromDoc(e)).toList()
     );
 
