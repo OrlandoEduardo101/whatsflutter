@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:whatsflutter/app/modules/home/components/conversas/model/conversas_model.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
+import 'package:whatsflutter/app/modules/mensagens/model/mensagem_model.dart';
 
 abstract class IFirebaseStorageRepository{
       Stream<UserModel> getUserData(String id);
@@ -16,6 +17,6 @@ abstract class IFirebaseStorageRepository{
       salvarMensagem(String idRemet, String idDest, Map<String, dynamic> msg);
       salvarConversa(String idRemet, String idDest, Map<String, dynamic> msg);
       Future<DocumentSnapshot> recuperarDadosMensagens(String idLog);
-      Stream<QuerySnapshot> listenerMensagens(String idLog, String idDest);
-      salvarImagemConversa(String idRemet,String nome, File img);
+      Stream<List<MensagemModel>> listenerMensagens(String idLog, String idDest);
+      StorageUploadTask salvarImagemConversa(String idRemet,String nome, File img);
 }

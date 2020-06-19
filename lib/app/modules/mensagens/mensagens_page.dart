@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
+import 'package:whatsflutter/app/modules/mensagens/model/mensagem_model.dart';
 import '../../../res.dart';
 import 'mensagens_controller.dart';
 
@@ -28,15 +29,9 @@ class _MensagensPageState
     // TODO: implement initState
     super.initState();
 
-    /*setState(() {
-      UserModel model2 = widget.model;
-      controller.setContato(model2);
-    });*/
-
     controller.setContato(widget.model);
     controller.setIdDest(widget.model.uid);
-    controller.setContatoTeste(widget.model.nome);
-    //controller.recuperarDadosMensagens();
+
   }
 
   @override
@@ -81,37 +76,41 @@ class _MensagensPageState
       ),
     );
 
-    var stream = Observer(builder: (_){
-      return Container();
-            /*if(controller.stream.data==null) {
-              return Center(
-                child: Column(
-                  children: [
-                    Text("Carregando conversas",
-                      style: TextStyle(color: Colors.white),),
-                    CircularProgressIndicator(),
-                  ],
-                ),
+    var stream = Observer(
+        builder: (_){
+            if(controller.mensagens==null || controller.mensagens.data==null || controller.idLog == null) { print('conversas');
+              return Expanded(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text("Carregando conversas",
+                          style: TextStyle(color: Colors.white),),
+                        CircularProgressIndicator(),
+                      ],
+                    ),
+                  )
               );
             }
-              else if(controller.stream.hasError){
+            if(controller.mensagens.hasError){print('erro');
                   return Expanded(
                     child: Text("erro"),
                   );
-                } else {
+                }
+              else {
                   print('AAAAAAAAAAAAAA');
-                  QuerySnapshot query = controller.stream.data;
+                  List<MensagemModel> list = controller.mensagens.data;
+                  print("queryyy: "+list.toString());
                   return Expanded(
                     child: ListView.builder(
                         controller: controller.scrollController,
-                        itemCount: query.documents.length,
+                        itemCount: list.length,
                         itemBuilder: (context, index) {
-                          List<DocumentSnapshot> msgs = query.documents.toList();
-                          DocumentSnapshot item = msgs[index];
+                          MensagemModel msgs = MensagemModel();
+                          msgs = list[index];
                           double largura = MediaQuery.of(context).size.width * 0.8;
                           Alignment alinhamento = Alignment.centerRight;
                           Color cor = Color(0xffd2ffa5);
-                          if (controller.idLog != item['idUser']) {
+                          if (controller.idLog != msgs.idUser) {
                             cor = Colors.white;
                             alinhamento = Alignment.bottomLeft;
                           }
@@ -126,14 +125,13 @@ class _MensagensPageState
                                     color: cor,
                                     borderRadius:
                                     BorderRadius.all(Radius.circular(8))),
-                                child: item['tipo'] == "text" ? Text(item['msg'], style: TextStyle(fontSize: 18)) : Image.network(item['urlIMG']),
+                                child: msgs.tipo == "text" ? Text(msgs.msg, style: TextStyle(fontSize: 18)) : Image.network(msgs.urlIMG),
                               ),
                             ),
                           );
                         }),
                   );
-
-          }*/
+          }
         });
 
     //var listview =

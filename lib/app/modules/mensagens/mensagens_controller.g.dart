@@ -39,6 +39,21 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
     });
   }
 
+  final _$contatoAtom = Atom(name: '_MensagensControllerBase.contato');
+
+  @override
+  UserModel get contato {
+    _$contatoAtom.reportRead();
+    return super.contato;
+  }
+
+  @override
+  set contato(UserModel value) {
+    _$contatoAtom.reportWrite(value, super.contato, () {
+      super.contato = value;
+    });
+  }
+
   final _$idDestAtom = Atom(name: '_MensagensControllerBase.idDest');
 
   @override
@@ -147,21 +162,6 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
     });
   }
 
-  final _$contatoAtom = Atom(name: '_MensagensControllerBase.contato');
-
-  @override
-  UserModel get contato {
-    _$contatoAtom.reportRead();
-    return super.contato;
-  }
-
-  @override
-  set contato(UserModel value) {
-    _$contatoAtom.reportWrite(value, super.contato, () {
-      super.contato = value;
-    });
-  }
-
   final _$testeAtom = Atom(name: '_MensagensControllerBase.teste');
 
   @override
@@ -192,18 +192,18 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
     });
   }
 
-  final _$streamAtom = Atom(name: '_MensagensControllerBase.stream');
+  final _$mensagensAtom = Atom(name: '_MensagensControllerBase.mensagens');
 
   @override
-  ObservableStream<dynamic> get stream {
-    _$streamAtom.reportRead();
-    return super.stream;
+  ObservableStream<List<MensagemModel>> get mensagens {
+    _$mensagensAtom.reportRead();
+    return super.mensagens;
   }
 
   @override
-  set stream(ObservableStream<dynamic> value) {
-    _$streamAtom.reportWrite(value, super.stream, () {
-      super.stream = value;
+  set mensagens(ObservableStream<List<MensagemModel>> value) {
+    _$mensagensAtom.reportWrite(value, super.mensagens, () {
+      super.mensagens = value;
     });
   }
 
@@ -229,7 +229,7 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
       AsyncAction('_MensagensControllerBase.enviarFoto');
 
   @override
-  Future enviarFoto() {
+  Future<dynamic> enviarFoto() {
     return _$enviarFotoAsyncAction.run(() => super.enviarFoto());
   }
 
@@ -245,22 +245,22 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
       ActionController(name: '_MensagensControllerBase');
 
   @override
-  dynamic setIdDest(dynamic value) {
+  dynamic setContato(dynamic value) {
     final _$actionInfo = _$_MensagensControllerBaseActionController.startAction(
-        name: '_MensagensControllerBase.setIdDest');
+        name: '_MensagensControllerBase.setContato');
     try {
-      return super.setIdDest(value);
+      return super.setContato(value);
     } finally {
       _$_MensagensControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setContato(dynamic value) {
+  dynamic setIdDest(dynamic value) {
     final _$actionInfo = _$_MensagensControllerBaseActionController.startAction(
-        name: '_MensagensControllerBase.setContato');
+        name: '_MensagensControllerBase.setIdDest');
     try {
-      return super.setContato(value);
+      return super.setIdDest(value);
     } finally {
       _$_MensagensControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -300,28 +300,6 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
   }
 
   @override
-  dynamic recuperarDados() {
-    final _$actionInfo = _$_MensagensControllerBaseActionController.startAction(
-        name: '_MensagensControllerBase.recuperarDados');
-    try {
-      return super.recuperarDados();
-    } finally {
-      _$_MensagensControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getIdLog() {
-    final _$actionInfo = _$_MensagensControllerBaseActionController.startAction(
-        name: '_MensagensControllerBase.getIdLog');
-    try {
-      return super.getIdLog();
-    } finally {
-      _$_MensagensControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Stream<QuerySnapshot> ListenerMsgs(String idLog, String idDest) {
     final _$actionInfo = _$_MensagensControllerBaseActionController.startAction(
         name: '_MensagensControllerBase.ListenerMsgs');
@@ -337,6 +315,7 @@ mixin _$MensagensController on _MensagensControllerBase, Store {
     return '''
 value: ${value},
 idLog: ${idLog},
+contato: ${contato},
 idDest: ${idDest},
 img: ${img},
 subindo: ${subindo},
@@ -344,10 +323,9 @@ logado: ${logado},
 controllerMsg: ${controllerMsg},
 scrollController: ${scrollController},
 controllerStream: ${controllerStream},
-contato: ${contato},
 teste: ${teste},
 snapshot: ${snapshot},
-stream: ${stream}
+mensagens: ${mensagens}
     ''';
   }
 }

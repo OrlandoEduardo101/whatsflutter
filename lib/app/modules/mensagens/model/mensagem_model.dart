@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class MensagemModel {
-  MensagemModel();
+  MensagemModel({this.idUser, this.msg, this.urlIMG, this.reference, this.tipo, this.data});
 
   String idUser;
   String msg;
@@ -7,7 +9,7 @@ class MensagemModel {
   String tipo;
   String time = DateTime.now().millisecondsSinceEpoch.toString();
   String data;
-
+  final DocumentReference reference;
   Map<String, dynamic> toMap(){
     Map<String, dynamic> map = {
       "idUser" : this.idUser,
@@ -18,6 +20,20 @@ class MensagemModel {
       "data" : this.data
     };
     return map;
+  }
+
+  factory MensagemModel.fromDoc(DocumentSnapshot doc) {
+    return MensagemModel(
+      idUser : doc['idUser'],
+      //nick : doc['nick'],
+      msg : doc['msg'],
+      urlIMG : doc['urlIMG'],
+      tipo : doc['tipo'],
+      data : doc['data'],
+      // present : doc['present'],
+      // isAdm : doc['isAdm'],
+      reference: doc.reference,
+    );
   }
 
 

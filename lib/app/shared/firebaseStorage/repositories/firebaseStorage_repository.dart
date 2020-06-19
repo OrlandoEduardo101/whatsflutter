@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:whatsflutter/app/modules/home/components/conversas/model/conversas_model.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
+import 'package:whatsflutter/app/modules/mensagens/model/mensagem_model.dart';
 import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseStorage_repository_interface.dart';
 
 class FirebaseStorageRepository implements IFirebaseStorageRepository{
@@ -87,21 +88,25 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   }
 
   @override
-  Stream<QuerySnapshot> listenerMensagens(String idLog, String idDest) {
-    var snapshot = firestore.collection("mensagens")
+  Stream<List<MensagemModel>> listenerMensagens(String idLog, String idDest) {
+    return firestore.collection("mensagens")
         .document(idLog)
         .collection(idDest).orderBy("data")
-        .snapshots();
-    return snapshot;
+        .snapshots().map((event){
+        print("Mensagens: " +  event.documents.toString());
+        return event.documents.map((e) => MensagemModel.fromDoc(e)).toList();
+    });
   }
 
   @override
-  salvarImagemConversa(String idRemet, String nome, File img) {
+  StorageUploadTask salvarImagemConversa(String idRemet, String nome, File img) {
     StorageReference raiz = storage.ref();
     StorageReference arq = raiz.child("mensagens").child(idRemet).child(nome+".jpg");
     StorageUploadTask task = arq.putFile(img);
     return task;
   }
+
+
 
 
 

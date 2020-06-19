@@ -31,6 +31,12 @@ abstract class _MensagensControllerBase with Store {
   String idLog;
 
   @observable
+  UserModel contato;
+
+  @action
+  setContato(value) => contato = value;
+
+  @observable
   String idDest;
 
   @action
@@ -49,11 +55,7 @@ abstract class _MensagensControllerBase with Store {
   @observable
   var controllerStream = StreamController<QuerySnapshot>.broadcast();
 
-  @observable
-  UserModel contato;
 
-  @action
-  setContato(value) => contato = value;
 
   @observable
   String teste;
@@ -63,8 +65,8 @@ abstract class _MensagensControllerBase with Store {
 
 
   _MensagensControllerBase(this.repository){
-    recuperarDados();
     recuperarDadosMensagens();
+
   }
 
   @action
@@ -119,17 +121,12 @@ abstract class _MensagensControllerBase with Store {
   @observable
   DocumentSnapshot snapshot;
 
- /* @observable
-  ObservableStream<UserModel> dados;*/
-
   @action
   recuperarDadosMensagens() async {
-   // FirebaseUser userLog = auth.getUser() as FirebaseUser;
     idLog = auth.user.uid;
-    //idDest = contato.uid;
+    //print("contato id " + contato.uid);
     snapshot =  await repository.recuperarDadosMensagens(idLog) ;
-    //await recuperarDados();
-    //logado = snapshot.data as UserModel;
+
     print("idlog:" +idLog);
 
     Map<String, dynamic> dados = snapshot.data;
@@ -139,48 +136,35 @@ abstract class _MensagensControllerBase with Store {
     print("LOGAAADOO: "+logado.nome);
 
     if (dados["urlIMG"] != null) {
-      //_urlRec = dados["urlIMG"];
       logado.urlIMG = dados["urlIMG"];
     }
 
-     //ListenerMsgs(auth.user.uid, contato.uid);
+     ListenerMsgs(auth.user.uid, contato.uid);
 
   }
 
-  @action
-  recuperarDados() {
-    /*idLog = auth.user.uid;
-    dados = repository.getUserData(idLog).asObservable();
-    print("id:" +idLog);
-    print("dadoss: " + dados.data.toString());
-    return dados;*/
-  }
 
-  @action
-  getIdLog(){
-    idLog = auth.user.uid;
-    return idLog;
-  }
   @observable
-  ObservableStream stream;
+  ObservableStream<List<MensagemModel>> mensagens;
+
   @action
   Stream<QuerySnapshot> ListenerMsgs(String idLog, String idDest){
-    stream = repository.listenerMensagens(idLog, idDest).asObservable();
-    print("Stream:  " + stream.toString());
-    stream.listen((event) {
-      controllerStream.add(event);
+    mensagens = repository.listenerMensagens(idLog, idDest).asObservable();
+    print("Stream:  " + mensagens.toString());
+    mensagens.listen((event) {
       Timer(
           Duration(seconds: 1), (){
         scrollController.jumpTo(scrollController.position.maxScrollExtent);
-      } );
+      });
     });
+
   }
 
   @action
-  enviarFoto() async {
+  Future enviarFoto() async {
     String nome = DateTime.now().millisecondsSinceEpoch.toString();
-    File img;
-    img = ImagePickerService().capturarImagemGaleria();
+
+    img = await ImagePickerService().capturarImagemGaleria();
 
 
     var task = repository.salvarImagemConversa(idLog, nome, img);
