@@ -1,3 +1,4 @@
+import 'package:whatsflutter/app/shared/services/imagePicker_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -26,30 +27,32 @@ import 'modules/mensagens/mensagens_controller.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-    //Bind((i) => AppController()),
-    Bind((i) => LoginModule()),
-    Bind((i) => AuthController()),
-    Bind((i) => LoginController(i.get())),
-    Bind((i) => CadastroController(i.get())),
-    Bind((i) => ConfiguracoesController(i.get())),
-    //Bind((i) => CadastroController(i.get())),
-    Bind<IAuthRepository>((i) => AuthRepository()),
-    Bind((i) => MensagensController()),
-    Bind<IFirebaseStorageRepository>((i) => FirebaseStorageRepository(Firestore.instance)),
-  ];
+        Bind((i) => ImagePickerService()),
+        //Bind((i) => AppController()),
+        Bind((i) => LoginModule()),
+        Bind((i) => AuthController()),
+        Bind((i) => LoginController(i.get())),
+        Bind((i) => CadastroController(i.get())),
+        Bind((i) => ConfiguracoesController(i.get())),
+        //Bind((i) => CadastroController(i.get())),
+        Bind<IAuthRepository>((i) => AuthRepository()),
+        Bind((i) => MensagensController(i.get())),
+        Bind<IFirebaseStorageRepository>(
+            (i) => FirebaseStorageRepository(Firestore.instance)),
+      ];
 
   @override
   List<Router> get routers => [
-    Router('/', child: (_, args) => SplashPage()),
-    Router('/login', module: LoginModule()),
-    Router('/home', module: HomeModule()),
-    Router('/cadastro', module: CadastroModule()),
-    Router('/cadastroDados', module: CadastroDadosModule()),
-    Router('/conf', module: ConfiguracoesModule()),
-    //Router('/mensagens', module: MensagensModule()),
-    Router('/mensagens', child: (_, args) => MensagensPage(model: args.data)),
-  ];
-
+        Router('/', child: (_, args) => SplashPage()),
+        Router('/login', module: LoginModule()),
+        Router('/home', module: HomeModule()),
+        Router('/cadastro', module: CadastroModule()),
+        Router('/cadastroDados', module: CadastroDadosModule()),
+        Router('/conf', module: ConfiguracoesModule()),
+        //Router('/mensagens', module: MensagensModule()),
+        Router('/mensagens',
+            child: (_, args) => MensagensPage(model: args.data)),
+      ];
 
   @override
   Widget get bootstrap => AppWidget();

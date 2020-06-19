@@ -22,7 +22,7 @@ class UserModel {
       //"nick" : this.nick,
       "email" : this.email,
       "urlIMG" : this.urlIMG,
-      //"uid" : this.uid,
+      "uid" : this.uid,
       //"present" : this.present,
       //"isAdm" : this.isAdm
     };
@@ -35,7 +35,7 @@ class UserModel {
       //"nick" : data['nick'],
       "email" : data['email'],
       "urlIMG" : data['urlIMG'],
-      //"uid" : data['uid'],
+      "uid" : data['uid'],
       //"present" : data['present'],
       //"isAdm" : data['isAdm']
     };
@@ -48,7 +48,7 @@ class UserModel {
           //nick : doc['nick'],
           email : doc['email'],
           urlIMG : doc['urlIMG'],
-         // uid : doc['uid'],
+          uid : doc['uid'],
          // present : doc['present'],
          // isAdm : doc['isAdm'],
           reference: doc.reference,

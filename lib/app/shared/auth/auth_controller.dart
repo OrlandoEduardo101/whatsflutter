@@ -40,6 +40,7 @@ abstract class _AuthControllerBase with Store{
 
   Future getUser() async {
     user = _authRepository.getUser as FirebaseUser;
+    return user;
   }
 
   Future logOut(){

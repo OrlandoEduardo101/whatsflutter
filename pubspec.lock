@@ -295,7 +295,7 @@ packages:
       name: get
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.13.1"
+    version: "2.14.1"
   glob:
     dependency: transitive
     description:
@@ -519,7 +519,7 @@ packages:
       name: shelf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.5"
+    version: "0.7.6"
   shelf_web_socket:
     dependency: transitive
     description:

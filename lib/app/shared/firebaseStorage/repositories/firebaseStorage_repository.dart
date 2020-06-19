@@ -75,7 +75,35 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   await firestore.collection(("mensagens")).document(idRemet).collection(idDest).add(msg);
   }
 
-
-
-
+  @override
+  salvarConversa(String idRemet, String idDest, Map<String,dynamic > msg) async {
+    await firestore.collection(("conversas")).document(idRemet).collection("ultima").document(idDest).setData(msg);
   }
+
+  @override
+  Future<DocumentSnapshot> recuperarDadosMensagens(String idLog) async {
+    DocumentSnapshot snapshot = await firestore.collection("users").document(idLog).get();
+    return snapshot;
+  }
+
+  @override
+  Stream<QuerySnapshot> listenerMensagens(String idLog, String idDest) {
+    var snapshot = firestore.collection("mensagens")
+        .document(idLog)
+        .collection(idDest).orderBy("data")
+        .snapshots();
+    return snapshot;
+  }
+
+  @override
+  salvarImagemConversa(String idRemet, String nome, File img) {
+    StorageReference raiz = storage.ref();
+    StorageReference arq = raiz.child("mensagens").child(idRemet).child(nome+".jpg");
+    StorageUploadTask task = arq.putFile(img);
+    return task;
+  }
+
+
+
+
+}
