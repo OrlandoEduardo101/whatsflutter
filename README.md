@@ -2,10 +2,15 @@
 Projetos para fins de estudos, clone daquele famoso app de mensagens.
 
 Branch master: projeto na ultima versão mexida (Mobx + Modular)
+
 Branch "desestruturado": projeto finalizado mas sem seguir nenhuma regra de estruturação ou arquitetura
-Branch "MobX+Modular": Projeto sendo refeito utilizando as regras do flutter modular e usando o MobX como gestão de estados.
+
+Branch "MobX+Modular": Projeto refeito utilizando as regras do flutter modular e usando o MobX como gestão de estados.
+
+Proximos passos: refazer usando o GetX como gestor de estados e gerenciador de rotas e refazer tambem com Bloc e BlocPatterns
 
 Tecnologias utilizadas:
+
 -Flutter
 
 -Get
