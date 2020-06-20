@@ -1,3 +1,5 @@
+import 'package:whatsflutter/app/modules/mensagens/componets/mensagensList/mensagensList_controller.dart';
+import 'package:whatsflutter/app/modules/mensagens/componets/caixaMsg/caixaMsg_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 import 'package:whatsflutter/app/modules/mensagens/mensagens_controller.dart';
@@ -11,10 +13,12 @@ class MensagensModule extends ChildModule {
 
   @override
   List<Bind> get binds => [
+        Bind((i) => MensagensListController()),
+        Bind((i) => CaixaMsgController()),
         Bind((i) => MensagensController(i.get())),
-        Bind<IFirebaseStorageRepository>((i) => FirebaseStorageRepository(Firestore.instance)),
-
-  ];
+        Bind<IFirebaseStorageRepository>(
+            (i) => FirebaseStorageRepository(Firestore.instance)),
+      ];
 
   @override
   List<Router> get routers => [

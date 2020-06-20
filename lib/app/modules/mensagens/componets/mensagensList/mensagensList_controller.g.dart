@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'conversas_controller.dart';
+part of 'mensagensList_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'conversas_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ConversasController on _ConversasControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ConversasControllerBase.value');
+mixin _$MensagensListController on _MensagensListControllerBase, Store {
+  final _$valueAtom = Atom(name: '_MensagensListControllerBase.value');
 
   @override
   int get value {
@@ -24,17 +24,17 @@ mixin _$ConversasController on _ConversasControllerBase, Store {
     });
   }
 
-  final _$_ConversasControllerBaseActionController =
-      ActionController(name: '_ConversasControllerBase');
+  final _$_MensagensListControllerBaseActionController =
+      ActionController(name: '_MensagensListControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_ConversasControllerBaseActionController.startAction(
-        name: '_ConversasControllerBase.increment');
+    final _$actionInfo = _$_MensagensListControllerBaseActionController
+        .startAction(name: '_MensagensListControllerBase.increment');
     try {
       return super.increment();
     } finally {
-      _$_ConversasControllerBaseActionController.endAction(_$actionInfo);
+      _$_MensagensListControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

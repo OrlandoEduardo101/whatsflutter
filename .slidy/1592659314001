@@ -1,0 +1,4 @@
+lib/app/modules/mensagens/componets/caixaMsg/caixaMsg_widget.dart
+test/app/modules/mensagens/componets/caixaMsg/caixaMsg_widget_test.dart
+lib/app/modules/mensagens/componets/caixaMsg/caixaMsg_controller.dart
+test/app/modules/mensagens/componets/caixaMsg/caixaMsg_controller_test.dart
