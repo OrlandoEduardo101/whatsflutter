@@ -17,14 +17,11 @@ class _ConfiguracoesPageState
     extends ModularState<ConfiguracoesPage, ConfiguracoesController> {
   //use 'controller' variable to access controller
 
-  //ConfiguracoesController controller = Modular.get();
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-  //  controller.recuperarDados();
   }
 
   @override

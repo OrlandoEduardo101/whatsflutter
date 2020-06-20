@@ -20,7 +20,6 @@ class LoginController = _LoginControllerBase with _$LoginController;
 abstract class _LoginControllerBase with Store {
 
   AuthController auth = Modular.get();
-  //Future<FirebaseUser> userCurrent;
   final IFirebaseStorageRepository repository;
   UserModel user = UserModel();
 
@@ -68,7 +67,6 @@ abstract class _LoginControllerBase with Store {
       load = true;
       print("login");
       await auth.loginWithGoogle();
-      //Modular.to.pushReplacementNamed('/home');
       Get.offAllNamed('/home');
     }catch(e){
       load = false;
@@ -78,12 +76,9 @@ abstract class _LoginControllerBase with Store {
 
   @action
    Future verifyUserData(String uid) async {
-    UserModel userLogged = UserModel();
         data =  await repository.verifyUserData(uid);
-        //userLogged = data.data;
         if(data == null){
           print("uid:  "+uid);
-          //print("uid logged:  "+userLogged.uid);
           Get.offAllNamed('/cadastroDados');
         } else{
           print("data: "+data.toString());

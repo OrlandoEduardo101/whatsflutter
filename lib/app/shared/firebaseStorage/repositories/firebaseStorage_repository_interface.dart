@@ -13,6 +13,7 @@ abstract class IFirebaseStorageRepository{
       updateName(String nome, Map<String, dynamic> dadosAtt);
       updateData(String nome, Map<String, dynamic> dadosAtt);
       Stream<List<UserModel>> recuperarContatos();
+      Stream<List<ConversasModel>> recuperarConversas(String idLog);
       Future<Map<String, dynamic>> verifyUserData(String id);
       salvarMensagem(String idRemet, String idDest, Map<String, dynamic> msg);
       salvarConversa(String idRemet, String idDest, Map<String, dynamic> msg);

@@ -16,7 +16,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
   //use 'controller' variable to access controller
 
   TabController _tabController;
-  //final ContatosController contatosController = Modular.get();
   List<String> itensMenu = ["Configurações","Deslogar"];
 
   @override
@@ -25,7 +24,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
     super.initState();
 
     _tabController = TabController(length: 2, vsync: this);
-    //ContatosController().recuperarContatos();
   }
 
   @override

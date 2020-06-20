@@ -56,8 +56,6 @@ abstract class _CadastroControllerBase with Store {
           usuario.urlIMG = "";
           cadastrarUser(usuario);
 
-            //msgError = "Sucesso";
-
         }  else {
             return msgError = "Senha precisa ter pelo menos 6 caracteres";
         }
@@ -77,11 +75,6 @@ abstract class _CadastroControllerBase with Store {
     print('uid:' + auth.user.uid);
     setUserData(usuario, auth.user.uid);
 
-    /*Firestore db = Firestore.instance;
-    db.collection("users")
-        .document(firebaseUser.user.uid)
-        .setData(usuario.toMap());*/
-
       msgError = "carregando...";
 
     }).catchError((error){
@@ -89,14 +82,12 @@ abstract class _CadastroControllerBase with Store {
     msgError = "Erro, verifique os campos!";
     });
 
-    //Get.offAllNamed("/home");
   }
 
   @action
   Future setUserData(UserModel usuario, String id) {
     print('uid2:' + auth.user.uid);
     print("Name: "+usuario.nome);
-    //var map = usuario.toMap();
 
     Map<String, dynamic> dadosSet = {
       "nome" : usuario.nome,
@@ -104,7 +95,6 @@ abstract class _CadastroControllerBase with Store {
       "urlIMG" : usuario.urlIMG
     };
 
-    //print("Namew: "+map['nome'].toString());
     repository.setUserData(auth.user.uid, dadosSet);
     Get.offAllNamed("/home");
   }

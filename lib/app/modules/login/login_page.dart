@@ -16,23 +16,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
-  //use 'controller' variable to access controller
-
   final LoginController controller = Modular.get();
   final TextErrorWidget textErrorWidget = TextErrorWidget();
 
-  //TextEditingController _controllerUser = TextEditingController();
-  //TextEditingController _controllerPassword = TextEditingController();
-  IconData _account = IconData(59475, fontFamily: 'MaterialIcons');
-  IconData _lock = IconData(59545, fontFamily: 'MaterialIcons');
-  Image _account_circle = Image.asset('icons/utilizadorC.png');
-  Image _logo_recode = Image.asset('image/logo_jr.png',);
-
-
-
   @override
   Widget build(BuildContext context) {
-    //Color verdeRecode = verdeRecode;
     return  Scaffold(
       body: Container(
         decoration: BoxDecoration(color: Color(0xff075E54)),
@@ -96,7 +84,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             ),
                             onPressed: controller.loginWithEmail
                         );
-
                       }
                   ),
                 ),
