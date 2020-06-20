@@ -10,13 +10,6 @@ import 'model/conversas_model.dart';
 
 class ConversasWidget extends StatelessWidget {
   ConversasController controller = Modular.get();
-  /*List<ConversasModel> listaConversa = [
-    ConversasModel(nome: "Thiago Neves", mensagem: "Fala zeze, bom dia cara", URLfoto: Res.nevesURL),
-    //ConversasModel("Richarlison Pombo", "PRUUUUU", Res.pomboURL),
-    //ConversasModel("Fabuloso", "Prefiro ajudar na briga!", Res.fabulosoURL),
-    //ConversasModel("Marinho", "que merda hein?! sabia não", Res.marinhoURL),
-    //ConversasModel("Mr. Jesus", "Ôto patamá", Res.jesusURL),
-  ];*/
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +38,6 @@ class ConversasWidget extends StatelessWidget {
             return ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (_, index) {
-                  //Conversa conversa = listaConversa[index];
-                  // List<UserModel> list = snapshot.data;
                   ConversasModel conv = ConversasModel();
                   conv=list[index];
                   UserModel user = UserModel(nome: conv.nome, urlIMG: conv.URLfoto, uid: conv.idDest);
@@ -66,7 +57,7 @@ class ConversasWidget extends StatelessWidget {
                     ),
                     subtitle: Text(
                       conv.tipo != 'text' ?
-                       "Imagem..." : conv.mensagem,
+                      "Imagem..." : conv.mensagem,
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 14
@@ -78,7 +69,6 @@ class ConversasWidget extends StatelessWidget {
                   );
                 });
           }
-
         }
     );
   }

@@ -25,13 +25,10 @@ class MensagemModel {
   factory MensagemModel.fromDoc(DocumentSnapshot doc) {
     return MensagemModel(
       idUser : doc['idUser'],
-      //nick : doc['nick'],
       msg : doc['msg'],
       urlIMG : doc['urlIMG'],
       tipo : doc['tipo'],
       data : doc['data'],
-      // present : doc['present'],
-      // isAdm : doc['isAdm'],
       reference: doc.reference,
     );
   }

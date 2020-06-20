@@ -15,6 +15,7 @@ class _SplashPageState extends State<SplashPage> {
 
     ReactionDisposer disposer;
 
+  //teste de logado
   @override
   void initState() {
     // TODO: implement initState

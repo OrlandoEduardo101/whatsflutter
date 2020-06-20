@@ -1,14 +1,9 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 import 'package:whatsflutter/app/modules/mensagens/componets/caixaMsg/caixaMsg_widget.dart';
 import 'package:whatsflutter/app/modules/mensagens/componets/mensagensList/mensagensList_widget.dart';
-import 'package:whatsflutter/app/modules/mensagens/model/mensagem_model.dart';
 import '../../../res.dart';
 import 'mensagens_controller.dart';
 
@@ -38,7 +33,6 @@ class _MensagensPageState
 
   @override
   Widget build(BuildContext context) {
-    //var listview =
     return Scaffold(
       appBar: AppBar(
         title: Row(

@@ -1,7 +1,6 @@
 import 'package:whatsflutter/app/modules/mensagens/componets/mensagensList/mensagensList_controller.dart';
 import 'package:whatsflutter/app/modules/mensagens/componets/caixaMsg/caixaMsg_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 import 'package:whatsflutter/app/modules/mensagens/mensagens_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:whatsflutter/app/modules/mensagens/mensagens_page.dart';
@@ -9,7 +8,6 @@ import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseSto
 import 'package:whatsflutter/app/shared/firebaseStorage/repositories/firebaseStorage_repository_interface.dart';
 
 class MensagensModule extends ChildModule {
-  //MensagensModule(ModularArguments args);
 
   @override
   List<Bind> get binds => [

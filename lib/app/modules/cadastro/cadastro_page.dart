@@ -57,7 +57,6 @@ class _CadastroPageState
                 Padding(
                   padding: EdgeInsets.only(bottom: 8),
                   child: TextField(
-                    //autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
@@ -71,7 +70,6 @@ class _CadastroPageState
                   ),
                 ),
                 TextField(
-                  //autofocus: true,
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   style: TextStyle(fontSize: 20),

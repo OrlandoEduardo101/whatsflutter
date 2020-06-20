@@ -29,7 +29,6 @@ abstract class _HomeControllerBase with Store {
         print("Deslogar");
         break;
     }
-    //print("Item: $itemEscolhido");
   }
 
   @observable

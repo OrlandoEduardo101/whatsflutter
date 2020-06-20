@@ -61,13 +61,6 @@ class AuthRepository implements IAuthRepository{
     )).user;
     return user;
 
-    /*then((user){
-      print("Sucess cadastro");
-      return user;
-    }).catchError((error){
-      print("erro cadastro" + error.toString());
-      return error;
-    });*/
   }
 
 }

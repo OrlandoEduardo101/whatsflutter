@@ -10,9 +10,6 @@ class ConversaModel {
   String tipo;
   String data;
 
-  /*Salvar() async {
-
-  }*/
 
   Map<String, dynamic> toMap(){
     Map<String, dynamic> map = {

@@ -40,8 +40,6 @@ abstract class _CadastroDadosControllerBase with Store {
           usuario.urlIMG = "";
           setUserData(usuario, auth.user.uid);
 
-          //msgError = "Sucesso";
-
     }else{
       return (msgError = "Nome precisa ter pelo menos 3 caracteres");
     }
@@ -51,7 +49,6 @@ abstract class _CadastroDadosControllerBase with Store {
   Future setUserData(UserModel usuario, String id) {
     print('uid2:' + auth.user.uid);
     print("Name: "+usuario.nome);
-    //var map = usuario.toMap();
 
     Map<String, dynamic> dadosSet = {
       "nome" : usuario.nome,

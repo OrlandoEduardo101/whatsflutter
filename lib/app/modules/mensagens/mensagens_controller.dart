@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:whatsflutter/app/modules/login/model/user_model.dart';
 import 'package:whatsflutter/app/modules/mensagens/model/conversa_model.dart';
@@ -93,7 +90,6 @@ abstract class _MensagensControllerBase with Store {
 
   @action
   salvarConversa(MensagemModel msg){
-    //recuperarDadosMensagens();
     ConversaModel cRemet = ConversaModel();
     cRemet.idRemet = idLog;
     cRemet.idDest = idDest;
@@ -105,7 +101,6 @@ abstract class _MensagensControllerBase with Store {
     repository.salvarConversa(cRemet.idRemet, cRemet.idDest, cRemet.toMap());
 
     ConversaModel cDest = ConversaModel();
-
     cDest.idRemet = idDest;
     cDest.idDest = idLog;
     cDest.mensagem = msg.msg;
@@ -139,7 +134,7 @@ abstract class _MensagensControllerBase with Store {
       logado.urlIMG = dados["urlIMG"];
     }
 
-     ListenerMsgs(auth.user.uid, contato.uid);
+    ListenerMsgs(auth.user.uid, contato.uid);
 
   }
 
@@ -172,13 +167,9 @@ abstract class _MensagensControllerBase with Store {
     //controle progresso
     task.events.listen((StorageTaskEvent event) {
       if (event.type == StorageTaskEventType.progress) {
-
-          subindo = true;
-        }
-       else if(event.type == StorageTaskEventType.success){
-
-          subindo = false;
-
+        subindo = true;
+      } else if(event.type == StorageTaskEventType.success){
+        subindo = false;
       }
     });
     //recuperar url da img
