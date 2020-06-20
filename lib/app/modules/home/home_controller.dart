@@ -9,6 +9,13 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
+  final auth = Modular.get<AuthController>();
+
+  _HomeControllerBase(){
+    if(auth.status == AuthStatus.logoff){
+      Get.offAllNamed("/login");
+    }
+  }
 
   @action
   escolhaMenuItem(String itemEscolhido){
