@@ -1,17 +1,23 @@
 # whatsflutter
 Projetos para fins de estudos, clone daquele famoso app de mensagens.
 
-Branch master: projeto não finalizado ainda
+Branch master: projeto na ultima versão mexida (Mobx + Modular)
 Branch "desestruturado": projeto finalizado mas sem seguir nenhuma regra de estruturação ou arquitetura
 Branch "MobX+Modular": Projeto sendo refeito utilizando as regras do flutter modular e usando o MobX como gestão de estados.
 
 Tecnologias utilizadas:
 -Flutter
+
 -Get
+
 -MobX
+
 -Modular
+
 -Image Picker
+
 -Firebase
+
 -Slidy
 
 #Screenshots
