@@ -25,7 +25,7 @@ Tecnologias utilizadas:
 
 -Slidy
 
-#Screenshots
+# Screenshots:
 
 ![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.00.682.png?raw=true)
 ![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.28.423.png?raw=true)
