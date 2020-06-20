@@ -9,18 +9,34 @@ part of 'conversas_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ConversasController on _ConversasControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ConversasControllerBase.value');
+  final _$listaConversaAtom =
+      Atom(name: '_ConversasControllerBase.listaConversa');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ObservableStream<List<ConversasModel>> get listaConversa {
+    _$listaConversaAtom.reportRead();
+    return super.listaConversa;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set listaConversa(ObservableStream<List<ConversasModel>> value) {
+    _$listaConversaAtom.reportWrite(value, super.listaConversa, () {
+      super.listaConversa = value;
+    });
+  }
+
+  final _$idLogAtom = Atom(name: '_ConversasControllerBase.idLog');
+
+  @override
+  String get idLog {
+    _$idLogAtom.reportRead();
+    return super.idLog;
+  }
+
+  @override
+  set idLog(String value) {
+    _$idLogAtom.reportWrite(value, super.idLog, () {
+      super.idLog = value;
     });
   }
 
@@ -28,11 +44,11 @@ mixin _$ConversasController on _ConversasControllerBase, Store {
       ActionController(name: '_ConversasControllerBase');
 
   @override
-  void increment() {
+  Stream<List<ConversasModel>> recuperarConversas() {
     final _$actionInfo = _$_ConversasControllerBaseActionController.startAction(
-        name: '_ConversasControllerBase.increment');
+        name: '_ConversasControllerBase.recuperarConversas');
     try {
-      return super.increment();
+      return super.recuperarConversas();
     } finally {
       _$_ConversasControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +57,8 @@ mixin _$ConversasController on _ConversasControllerBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+listaConversa: ${listaConversa},
+idLog: ${idLog}
     ''';
   }
 }

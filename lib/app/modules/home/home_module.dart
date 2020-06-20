@@ -11,6 +11,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind<ContatosController>((i) => ContatosController(repository: i.get())),
+        Bind<ConversasController>((i) => ConversasController(repository: i.get())),
       //  Bind((i) => ConversasController()),
         Bind((i) => HomeController()),
         Bind<IFirebaseStorageRepository>((i) => FirebaseStorageRepository(Firestore.instance)),

@@ -72,6 +72,15 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
   }
 
   @override
+  Stream<List<ConversasModel>> recuperarConversas(String idLog) {
+
+    return firestore.collection("conversas").document(idLog).collection("ultima").orderBy("data", descending: true).snapshots().map((event) => event.documents.map(
+            (e) => ConversasModel.fromDoc(e)).toList()
+    );
+
+  }
+
+  @override
   salvarMensagem(String idRemet, String idDest, Map<String, dynamic> msg) async{
   await firestore.collection(("mensagens")).document(idRemet).collection(idDest).add(msg);
   }
@@ -105,10 +114,6 @@ class FirebaseStorageRepository implements IFirebaseStorageRepository{
     StorageUploadTask task = arq.putFile(img);
     return task;
   }
-
-
-
-
 
 
 }

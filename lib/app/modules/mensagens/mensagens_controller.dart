@@ -102,11 +102,11 @@ abstract class _MensagensControllerBase with Store {
     cRemet.URLfoto = contato.urlIMG;
     cRemet.tipo = msg.tipo;
     cRemet.data = Timestamp.now().toString();
-    repository.salvarConversa(cRemet.idDest, cRemet.idDest, cRemet.toMap());
+    repository.salvarConversa(cRemet.idRemet, cRemet.idDest, cRemet.toMap());
 
     ConversaModel cDest = ConversaModel();
 
-    cDest.idRemet = contato.uid;
+    cDest.idRemet = idDest;
     cDest.idDest = idLog;
     cDest.mensagem = msg.msg;
     cDest.nome = logado.nome;
@@ -115,7 +115,7 @@ abstract class _MensagensControllerBase with Store {
     cDest.tipo = msg.tipo;
     cDest.data = Timestamp.now().toString();
     print("IDDEST "+ cDest.idDest);
-    repository.salvarConversa(cDest.idDest, cDest.idDest, cDest.toMap());
+    repository.salvarConversa(cDest.idRemet, cDest.idDest, cDest.toMap());
 
   }
   @observable
