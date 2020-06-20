@@ -1,0 +1,4 @@
+lib/app/modules/home/components/conversas/conversas_widget.dart
+test/app/modules/home/components/conversas/conversas_widget_test.dart
+lib/app/modules/home/components/conversas/conversas_controller.dart
+test/app/modules/home/components/conversas/conversas_controller_test.dart
