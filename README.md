@@ -9,7 +9,7 @@ https://github.com/OrlandoEduardo101/whatsflutter/tree/vesão_desestruturada
 Branch "MobX+Modular": Projeto refeito utilizando as regras do flutter modular e usando o MobX como gestão de estados.
 https://github.com/OrlandoEduardo101/whatsflutter/tree/mobx+modular
 
-Proximos passos: refazer usando o GetX como gestor de estados e gerenciador de rotas e refazer tambem com Bloc e BlocPatterns
+Proximos passos: refazer usando o Bloc e BlocPatterns
 
 Tecnologias utilizadas:
 
